@@ -1,49 +1,26 @@
-<div style="max-width:400px; margin:auto; background:white; padding:20px; border-radius:20px; font-family:sans-serif;">
+<div style="max-width:500px; margin:auto; background:white; padding:25px; border-radius:20px;">
+  <h3 style="font-weight:bold; margin-bottom:20px; letter-spacing:1px;">VOS INFOS PRIVÉ</h3>
 
-  <h3 style="text-align:center; font-size:13px; font-weight:bold; margin-bottom:20px; letter-spacing:1px;">VOS INFOS PRIVÉ</h3>
+  <label style="font-size:12px;">Nom / Société</label>
+  <input type="text" id="company" placeholder="Nom / Société" style="width:100%; padding:12px; border:1px solid #eee; border-radius:10px; margin:8px 0 15px 0; background:#f9f9f9;">
 
-  <label style="font-size:11px; font-weight:bold;">Nom de votre société</label>
-  <input type="text" id="company" placeholder="Mon entreprise" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ddd; margin:8px 0 15px 0;">
+  <label style="font-size:12px;">ICE</label>
+  <input type="text" id="ice" placeholder="ICE" style="width:100%; padding:12px; border:1px solid #eee; border-radius:10px; margin:8px 0 15px 0; background:#f9f9f9;">
 
-  <label style="font-size:11px; font-weight:bold;">ICE</label>
-  <input type="text" id="ice" placeholder="ICE" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ddd; margin:8px 0 15px 0;">
+  <label style="font-size:12px;">Tél / RC / IF / Adresse</label>
+  <input type="text" id="tel" placeholder="Tél" style="width:100%; padding:12px; border:1px solid #eee; border-radius:10px; margin:8px 0 15px 0; background:#f9f9f9;">
 
-  <label style="font-size:11px; font-weight:bold;">RC / IF / Adresse</label>
-  <input type="text" id="rc" placeholder="RC / IF..." style="width:100%; padding:12px; border-radius:10px; border:1px solid #ddd; margin:8px 0 20px 0;">
-
-  <div style="display:flex; gap:10px; margin-bottom:15px;">
-    <button onclick="effacerInfos()" style="flex:1; padding:10px; border-radius:20px; border:1px solid #ddd; background:white; font-size:12px; cursor:pointer;">Effacer mes infos</button>
-    <button onclick="effacerHistorique()" style="flex:1; padding:10px; border-radius:20px; border:1px solid #ddd; background:white; font-size:12px; cursor:pointer;">Effacer Historique</button>
-  </div>
-
-  <button onclick="creerFacture()" style="width:100%; padding:14px; background:black; color:white; border-radius:25px; font-weight:bold; border:none; cursor:pointer;">→ Créer une Facture</button>
-
+  <p style="font-size:11px; color:#888; text-align:center; margin-top:10px;">كيتسجلو بوحدهم، المرة الجاية غادي تلقاهم</p>
 </div>
 
 <script>
-window.onload = function(){
-  document.getElementById('company').value = localStorage.getItem('facture_company') || '';
-  document.getElementById('ice').value = localStorage.getItem('facture_ice') || '';
-  document.getElementById('rc').value = localStorage.getItem('facture_rc') || '';
-}
-function creerFacture(){
-  localStorage.setItem('facture_company', document.getElementById('company').value);
-  localStorage.setItem('facture_ice', document.getElementById('ice').value);
-  localStorage.setItem('facture_rc', document.getElementById('rc').value);
-  window.location.href = "/";
-}
-function effacerInfos(){
-  if(confirm("مسح معلوماتك؟")){
-    localStorage.removeItem('facture_company');
-    localStorage.removeItem('facture_ice');
-    localStorage.removeItem('facture_rc');
-    document.getElementById('company').value='';
-    document.getElementById('ice').value='';
-    document.getElementById('rc').value='';
-  }
-}
-function effacerHistorique(){
-  localStorage.removeItem('historique_factures');
-  alert('Historique effacé');
-}
+// يعمّر المعلومات القديمة
+document.getElementById('company').value = localStorage.getItem('company') || '';
+document.getElementById('ice').value = localStorage.getItem('ice') || '';
+document.getElementById('tel').value = localStorage.getItem('tel') || '';
+
+// ملي كيكتب المقاول كيتسجلو بوحدهم بلا بوطونة
+document.getElementById('company').addEventListener('input', (e)=> localStorage.setItem('company', e.target.value));
+document.getElementById('ice').addEventListener('input', (e)=> localStorage.setItem('ice', e.target.value));
+document.getElementById('tel').addEventListener('input', (e)=> localStorage.setItem('tel', e.target.value));
 </script>
