@@ -1,10 +1,61 @@
-<div class="bg-zinc-50 rounded-2xl p-5 border border-zinc-100">
-  <p class="text-[11px] font-black tracking-widest text-black mb-1">VOS INFOS - Votre entreprise</p>
-  <p class="text-[10px] text-zinc-500 mb-3">Ces infos sont les vôtres, elles restent enregistrées sur votre appareil (privé). Vous les remplissez une seule fois.</p>
-  <div class="grid grid-cols-2 gap-3">
-    <input id="ent_nom" name="ent_nom" placeholder="Votre nom / société *" class="col-span-2 px-4 py-3 rounded-xl border bg-white">
-    <input id="ent_ice" name="ent_ice" placeholder="Votre ICE / IF" class="px-4 py-3 rounded-xl border bg-white">
-    <input id="ent_tel" name="ent_tel" placeholder="Votre téléphone" class="px-4 py-3 rounded-xl border bg-white">
-    <input id="ent_adresse" name="ent_adresse" placeholder="Votre adresse" class="col-span-2 px-4 py-3 rounded-xl border bg-white">
-  </div>
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FACTURE POWER PRO</title><script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800;900&display=swap" rel="stylesheet">
+<style>body{font-family:'Manrope',sans-serif}</style></head>
+<body class="bg-[#f6f7fb] min-h-screen">
+<nav class="bg-white border-b sticky top-0 z-10"><div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-black flex items-center justify-center text-white font-black">FP</div><b>FACTURE <span class="text-blue-600">POWER PRO</span></b><span class="text-[10px] bg-black text-white px-2.5 py-1 rounded-full tracking-widest">ALL OPTIONS</span></div><button onclick="localStorage.clear();location.reload()" class="text-xs text-zinc-400 underline">Effacer mes infos</button></div></nav>
+
+<div class="max-w-3xl mx-auto px-6 py-8">
+<div class="bg-white rounded-[28px] shadow-[0_20px_60px_-20px_rgba(0,0,0,0.2)] p-8 border">
+<h1 class="text-2xl font-black">Nouvelle facture PRO</h1>
+<p class="text-sm text-zinc-500 mt-2">Créez une facture pro en 30 secondes. Vos infos restent chez vous.</p>
+
+<form method="POST" action="/create" class="space-y-6 mt-8" id="f">
+
+<!-- VOS INFOS -->
+<div class="bg-[#fcf9ef] rounded-2xl p-5 border border-[#efe9d7]">
+<div class="flex justify-between items-center mb-3"><p class="text-[11px] font-black tracking-[0.2em] text-black">VOS INFOS - VOTRE ENTREPRISE</p><span class="text-[9px] bg-[#D4AF37] text-white px-2 py-1 rounded-full">PRIVÉ - RESTE CHEZ VOUS</span></div>
+<p class="text-[11px] text-zinc-500 mb-4 leading-5">C'est <b>vous</b> le prestataire. Remplissez une seule fois, ça restera enregistré sur votre navigateur. Vos clients ne verront que le résultat final.</p>
+<div class="grid grid-cols-2 gap-3">
+<input id="ent_nom" name="ent_nom" placeholder="Votre nom / société *" required class="col-span-2 px-4 py-3.5 rounded-xl border bg-white font-bold border-zinc-900">
+<input id="ent_ice" name="ent_ice" placeholder="Votre ICE / IF" class="px-4 py-3.5 rounded-xl border bg-white">
+<input id="ent_tel" name="ent_tel" placeholder="Votre téléphone" class="px-4 py-3.5 rounded-xl border bg-white">
+<input id="ent_adresse" name="ent_adresse" placeholder="Votre adresse" class="col-span-2 px-4 py-3.5 rounded-xl border bg-white">
 </div>
+</div>
+
+<!-- CLIENT -->
+<div class="bg-zinc-50 rounded-2xl p-5 border"><p class="text-[11px] font-black tracking-[0.2em] text-zinc-400 mb-3">INFOS CLIENT - À REMPLIR À CHAQUE FACTURE</p>
+<div class="grid grid-cols-2 gap-3">
+<input name="client" placeholder="Nom du client *" required class="px-4 py-3.5 rounded-xl bg-white border-2 border-zinc-900 font-bold">
+<input name="client_tel" placeholder="Tél client" class="px-4 py-3.5 rounded-xl bg-white border">
+<input name="numero" value="FAC-2026-001" class="px-4 py-3.5 rounded-xl bg-white border text-sm">
+<input name="date" type="date" class="px-4 py-3.5 rounded-xl bg-white border">
+</div></div>
+
+<!-- ARTICLES -->
+<div><p class="font-bold text-sm mb-2">Articles / Prestations</p><div id="items" class="space-y-2"><div class="flex gap-2"><input name="nom[]" placeholder="Désignation *" required class="flex-1 px-4 py-3.5 rounded-xl bg-zinc-900 text-white placeholder-zinc-400"><input name="qte[]" type="number" value="1" class="w-20 px-3 py-3.5 rounded-xl bg-zinc-900 text-white text-center"><input name="prix[]" type="number" placeholder="Prix" required class="w-28 px-3 py-3.5 rounded-xl bg-zinc-900 text-white text-center placeholder-zinc-400"></div></div><button type="button" onclick="addItem()" class="mt-3 w-full border-2 border-dashed border-zinc-200 rounded-xl py-3 font-bold text-zinc-500 text-sm hover:bg-zinc-50">+ Ajouter un article</button></div>
+
+<!-- OPTIONS -->
+<div class="grid grid-cols-3 gap-3">
+<select name="tva" class="px-3 py-3.5 rounded-xl border bg-white text-sm font-bold"><option value="20">TVA 20%</option><option value="10">TVA 10%</option><option value="7">TVA 7%</option><option value="14">TVA 14%</option><option value="0">Sans TVA</option></select>
+<input name="remise" type="number" placeholder="Remise %" value="0" class="px-3 py-3.5 rounded-xl border bg-white text-sm">
+<select name="paiement" class="px-3 py-3.5 rounded-xl border bg-white text-sm"><option>Espèces</option><option>Virement</option><option>Wafacash</option><option>Chèque</option></select>
+</div>
+
+<textarea name="notes" placeholder="Notes / Merci pour votre confiance..." class="w-full px-4 py-3 rounded-xl border bg-white h-20 text-sm"></textarea>
+
+<button class="w-full bg-black text-white rounded-2xl p-4 font-black text-[15px] tracking-wide shadow-[0_10px_30px_-10px_black] hover:bg-zinc-900">⚡ GÉNÉRER LA FACTURE PRO</button>
+<p class="text-center text-[10px] text-zinc-400 tracking-widest">FACTURE POWER • OUTIL GRATUIT POUR LES PROS</p>
+
+</form>
+</div>
+</div>
+</div>
+
+<script>
+function addItem(){document.getElementById('items').insertAdjacentHTML('beforeend',`<div class="flex gap-2 mt-2"><input name="nom[]" placeholder="Désignation *" required class="flex-1 px-4 py-3.5 rounded-xl bg-zinc-900 text-white placeholder-zinc-400"><input name="qte[]" type="number" value="1" class="w-20 px-3 py-3.5 rounded-xl bg-zinc-900 text-white text-center"><input name="prix[]" type="number" placeholder="Prix" required class="w-28 px-3 py-3.5 rounded-xl bg-zinc-900 text-white text-center placeholder-zinc-400"></div>`)}
+const ids=['ent_nom','ent_ice','ent_tel','ent_adresse'];ids.forEach(id=>{let el=document.getElementById(id);let v=localStorage.getItem(id);if(v) el.value=v;el.addEventListener('input',()=>localStorage.setItem(id,el.value))});
+</script>
+</body></html>
