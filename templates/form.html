@@ -1,66 +1,42 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FACTURE POWER - Premium</title>
+<title>FACTURE POWER</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&display=swap" rel="stylesheet">
 <style>body{font-family:'Manrope',sans-serif}</style>
 </head>
 <body class="bg-[#eef2ff] min-h-screen">
-<nav class="bg-white/80 backdrop-blur border-b sticky top-0 z-10">
-<div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-black flex items-center justify-center text-white font-black text-lg shadow-lg">FP</div>
-<div><p class="font-extrabold text-[16px] leading-none">FACTURE <span class="text-blue-600">POWER</span></p><p class="text-[10px] text-gray-400 tracking-widest font-bold">GESTION PRO</p></div>
+<nav class="bg-white border-b sticky top-0">
+<div class="max-w-5xl mx-auto px-6 py-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-black flex items-center justify-center text-white font-black">FP</div>
+<p class="font-extrabold">FACTURE <span class="text-blue-600">POWER</span></p>
 <span class="ml-3 text-[10px] bg-blue-600 text-white px-3 py-1 rounded-full font-bold">V2 PREMIUM</span>
 </div>
-</div>
 </nav>
-
 <div class="max-w-5xl mx-auto px-6 py-10">
-<div class="grid md:grid-cols-3 gap-8">
-<div class="md:col-span-2 bg-white rounded-[28px] shadow-[0_20px_60px_-20px_rgba(0,0,0,0.2)] border border-white p-8">
-<div class="flex justify-between items-start mb-8">
-<div><h1 class="text-3xl font-extrabold">Nouvelle facture</h1><p class="text-gray-400 text-sm mt-1">Design premium • Prêt à imprimer</p></div>
-<div class="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center">⚡</div>
-</div>
-
+<div class="bg-white rounded-[28px] shadow-xl border p-8 max-w-2xl mx-auto">
+<h1 class="text-3xl font-extrabold mb-2">Nouvelle facture</h1>
+<p class="text-gray-400 text-sm mb-8">Design premium • Prêt à imprimer</p>
 <form method="POST" action="/create" class="space-y-6">
+<input name="client" placeholder="Nom du client" required class="w-full px-4 py-3.5 rounded-xl bg-zinc-50 border">
 <div class="grid grid-cols-2 gap-4">
-<input name="client" placeholder="Nom du client" required class="col-span-2 px-4 py-3.5 rounded-xl bg-zinc-50 border border-zinc-200 focus:border-blue-600 outline-none font-bold">
-<input name="numero" value="FAC-2026-001" class="px-4 py-3.5 rounded-xl bg-zinc-50 border border-zinc-200 outline-none text-sm">
-<input name="date" type="date" class="px-4 py-3.5 rounded-xl bg-zinc-50 border border-zinc-200 outline-none text-sm">
+<input name="numero" value="FAC-2026-001" class="px-4 py-3.5 rounded-xl bg-zinc-50 border">
+<input name="date" type="date" class="px-4 py-3.5 rounded-xl bg-zinc-50 border">
 </div>
-
-<div class="pt-4">
-<p class="font-extrabold text-sm mb-3">Articles / Services</p>
 <div id="items" class="space-y-3">
 <div class="flex gap-2">
-<input name="nom[]" placeholder="Désignation / الخدمة" required class="flex-1 px-4 py-3 rounded-xl bg-zinc-900 text-white border border-zinc-700 placeholder:text-zinc-500">
-<input name="qte[]" type="number" value="1" class="w-20 px-3 py-3 rounded-xl bg-zinc-900 text-white border border-zinc-700 text-center">
-<input name="prix[]" type="number" placeholder="Prix" required class="w-28 px-3 py-3 rounded-xl bg-zinc-900 text-white border border-zinc-700 text-center">
+<input name="nom[]" placeholder="Désignation" required class="flex-1 px-4 py-3 rounded-xl bg-zinc-900 text-white">
+<input name="qte[]" type="number" value="1" class="w-20 px-3 py-3 rounded-xl bg-zinc-900 text-white text-center">
+<input name="prix[]" type="number" placeholder="Prix" required class="w-28 px-3 py-3 rounded-xl bg-zinc-900 text-white text-center">
 </div>
 </div>
-<button type="button" onclick="addItem()" class="mt-3 w-full border-2 border-dashed border-zinc-200 rounded-xl py-3 text-sm font-bold text-zinc-500 hover:border-blue-600 hover:text-blue-600">+ Ajouter un article</button>
-</div>
-
-<button class="w-full bg-gradient-to-r from-blue-600 to-black text-white rounded-xl p-4 font-extrabold text-lg shadow-lg hover:scale-[1.02] transition">⚡ Générer la facture premium</button>
+<button type="button" onclick="document.getElementById('items').innerHTML += `<div class='flex gap-2 mt-2'><input name='nom[]' placeholder='Désignation' required class='flex-1 px-4 py-3 rounded-xl bg-zinc-900 text-white'><input name='qte[]' type='number' value='1' class='w-20 px-3 py-3 rounded-xl bg-zinc-900 text-white text-center'><input name='prix[]' type='number' placeholder='Prix' required class='w-28 px-3 py-3 rounded-xl bg-zinc-900 text-white text-center'></div>`" class="w-full border-2 border-dashed rounded-xl py-3 font-bold text-zinc-500">+ Ajouter un article</button>
+<button class="w-full bg-gradient-to-r from-blue-600 to-black text-white rounded-xl p-4 font-extrabold text-lg">⚡ Générer la facture</button>
 </form>
 </div>
-
-<div class="bg-zinc-900 text-white rounded-[28px] p-6 h-fit">
-<p class="font-bold">Aperçu</p><p class="text-zinc-400 text-xs mt-2">Ta facture aura le logo FP, un dégradé bleu/noir et un design prêt pour l'impression. 100% compatible mobile.</p>
-<div class="mt-6 p-4 bg-white rounded-xl text-black"><div class="flex items-center gap-2"><div class="w-6 h-6 bg-black rounded flex items-center justify-center text-white text-[10px] font-black">FP</div><span class="font-extrabold text-xs">FACTURE POWER</span></div><div class="h-1 bg-gradient-to-r from-blue-600 to-black mt-3 rounded"></div></div>
 </div>
-</div>
-</div>
-
-<script>
-function addItem(){
-document.getElementById('items').innerHTML += `<div class="flex gap-2 mt-2"><input name="nom[]" placeholder="Désignation" required class="flex-1 px-4 py-3 rounded-xl bg-zinc-900 text-white border border-zinc-700"><input name="qte[]" type="number" value="1" class="w-20 px-3 py-3 rounded-xl bg-zinc-900 text-white border border-zinc-700 text-center"><input name="prix[]" type="number" placeholder="Prix" required class="w-28 px-3 py-3 rounded-xl bg-zinc-900 text-white border border-zinc-700 text-center"></div>`;
-}
-</script>
 </body>
 </html>
