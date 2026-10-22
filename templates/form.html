@@ -1,85 +1,85 @@
 <!DOCTYPE html>
 <html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FACTURE POWER - LUXURY</title><script src="https://cdn.tailwindcss.com"></script>
+<title>FACTURE POWER - PRO</title><script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
-<style>body{font-family:'Manrope',sans-serif;background:#f8f7f3}.serif{font-family:'Cormorant Garamond',serif}.gold{color:#B8860B}</style>
+<style>body{font-family:'Manrope',sans-serif;background:#f4f2ec}</style>
 </head>
-<body class="min-h-screen p-4 md:p-8">
-<div class="max-w-3xl mx-auto bg-white rounded-[32px] shadow-xl border border-[#efe9d7] overflow-hidden">
+<body class="min-h-screen p-3 md:p-6">
+<div class="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-6">
 
-<!-- TOP LUXURY -->
-<div class="bg-black p-8 md:p-10 flex justify-between items-center">
-<div class="flex items-center gap-5">
-<label class="group w-[72px] h-[72px] bg-[#1a1a1a] border border-[#D4AF37]/30 rounded-[22px] flex items-center justify-center overflow-hidden cursor-pointer relative">
-<img id="logoPreview" class="hidden w-full h-full object-cover">
-<span id="logoText" class="text-[#D4AF37] font-black text-2xl">FP</span>
-<div class="absolute inset-0 bg-black/60 hidden group-hover:flex items-center justify-center text-[9px] text-white tracking-widest">CHANGER</div>
-<input type="file" id="logoInput" class="hidden" accept="image/*">
-</label>
+<!-- LEFT: FORM PRO -->
+<div class="bg-white rounded-[32px] shadow-xl border border-[#efe9d7] overflow-hidden">
+<div class="bg-black p-8 flex justify-between items-center">
+<div class="flex items-center gap-4">
+<label class="w-[64px] h-[64px] bg-[#1a1a1a] border border-[#D4AF37]/30 rounded-[18px] flex items-center justify-center overflow-hidden cursor-pointer relative group">
+<img id="logoPreview" class="hidden w-full h-full object-cover"><span id="logoText" class="text-[#D4AF37] font-black text-xl">FP</span>
+<div class="absolute inset-0 bg-black/70 hidden group-hover:flex items-center justify-center text-[8px] text-white">CHANGER</div>
+<input type="file" id="logoInput" class="hidden" accept="image/*"></label>
 <div><p class="font-black tracking-[0.25em] text-white text-[13px]">FACTURE POWER</p><p class="text-[#D4AF37] text-[10px] tracking-[0.4em] mt-1">LUXURY EDITION</p></div>
 </div>
-<a id="waMyLink" target="_blank" class="hidden bg-[#25D366] text-white px-5 py-2.5 rounded-full text-xs font-bold flex items-center gap-2">◉ WhatsApp</a>
+<a id="waMyLink" target="_blank" class="hidden bg-[#25D366] text-white px-4 py-2 rounded-full text-xs font-bold">WhatsApp</a>
 </div>
 
-<div class="p-8 md:p-10">
-<form action="/facture" method="POST">
-
-<!-- HISTORIQUE BIEN VISIBLE -->
-<div class="mb-8">
-<div class="flex justify-between items-center mb-3">
-<p class="text-[11px] font-bold tracking-[0.3em] text-zinc-800">ENTREPRISES RÉCENTES</p>
-<button type="button" onclick="clearHist()" class="text-[10px] text-zinc-400 underline">Effacer</button>
-</div>
-<div id="historic" class="bg-[#fcfbf7] border border-[#efe9d7] rounded-2xl p-3 flex gap-2 flex-wrap min-h-[50px] items-center">
-<p id="histEmpty" class="text-[12px] text-zinc-400">Aucun historique - il apparaîtra ici après votre 1ère facture</p>
-</div>
-</div>
-
-<h2 class="font-bold text-[11px] tracking-[0.3em] mb-4">VOTRE ENTREPRISE</h2>
-<div class="space-y-3">
-<input name="ent_nom" id="company" placeholder="Nom de la société *" required class="w-full border border-zinc-100 focus:border-black rounded-2xl p-4 bg-[#fcfbf7] text-[14px] outline-none">
-<div class="grid grid-cols-2 gap-3">
-<input name="ent_ice" id="ice" placeholder="ICE" class="border rounded-2xl p-4 bg-[#fcfbf7] text-sm outline-none">
-<input name="ent_rc" id="rc" placeholder="RC / IF" class="border rounded-2xl p-4 bg-[#fcfbf7] text-sm outline-none">
-</div>
-<input name="ent_adresse" id="adresse" placeholder="Adresse complète" class="w-full border rounded-2xl p-4 bg-[#fcfbf7] text-sm outline-none">
-<div class="grid grid-cols-2 gap-3">
-<input name="ent_tel" id="tel" placeholder="Téléphone / WhatsApp *" required class="border rounded-2xl p-4 bg-[#fcfbf7] text-sm outline-none">
-<input name="ent_email" id="email" placeholder="Email" class="border rounded-2xl p-4 bg-[#fcfbf7] text-sm outline-none">
-</div>
-<p class="text-[11px] text-zinc-400">Votre WhatsApp sera lié automatiquement ci-dessus</p>
+<div class="p-8">
+<form action="/facture" method="POST" id="mainForm">
+<h2 class="text-[11px] font-bold tracking-[0.3em] mb-5">INFORMATIONS PROFESSIONNELLES</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<input name="ent_nom" id="company" placeholder="Raison sociale *" required class="md:col-span-2 w-full border border-zinc-100 bg-[#fcfbf7] rounded-2xl p-4 text-sm outline-none focus:border-black">
+<input name="ent_ice" id="ice" placeholder="ICE" class="border bg-[#fcfbf7] rounded-2xl p-4 text-sm outline-none">
+<input name="ent_rc" id="rc" placeholder="RC / IF" class="border bg-[#fcfbf7] rounded-2xl p-4 text-sm outline-none">
+<input name="ent_adresse" id="adresse" placeholder="Adresse complète" class="md:col-span-2 border bg-[#fcfbf7] rounded-2xl p-4 text-sm outline-none">
+<input name="ent_tel" id="tel" placeholder="Tél / WhatsApp *" required class="border bg-[#fcfbf7] rounded-2xl p-4 text-sm outline-none">
+<input name="ent_email" id="email" placeholder="Email pro" class="border bg-[#fcfbf7] rounded-2xl p-4 text-sm outline-none">
 </div>
 
 <div class="mt-10">
-<div class="flex justify-between items-center mb-4"><h2 class="font-bold text-[11px] tracking-[0.3em]">CLIENT</h2><a id="waClientLink" target="_blank" class="hidden text-[11px] bg-[#25D366] text-white px-3 py-1 rounded-full font-bold">WhatsApp Client</a></div>
-<input name="client" placeholder="Nom du client *" required class="w-full border border-zinc-200 rounded-2xl p-4 text-sm outline-none mb-3">
-<div class="grid grid-cols-2 gap-3">
-<input name="client_tel" id="clientTel" placeholder="Tél Client" class="border rounded-2xl p-4 text-sm outline-none">
+<div class="flex justify-between items-center mb-5"><h2 class="text-[11px] font-bold tracking-[0.3em]">CLIENT</h2><a id="waClientLink" target="_blank" class="hidden text-[11px] bg-[#25D366] text-white px-3 py-1.5 rounded-full font-bold">WhatsApp Client</a></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<input name="client" placeholder="Nom client / Société *" required class="md:col-span-2 border rounded-2xl p-4 text-sm outline-none focus:border-black">
+<input name="client_tel" id="clientTel" placeholder="Téléphone" class="border rounded-2xl p-4 text-sm outline-none">
 <input name="client_ice" placeholder="ICE Client" class="border rounded-2xl p-4 text-sm outline-none">
 </div>
 </div>
 
 <div class="mt-10">
-<div class="flex justify-between items-center mb-4"><h2 class="font-bold text-[11px] tracking-[0.3em]">PRESTATIONS</h2><button type="button" onclick="addItem()" class="text-[11px] font-bold border border-[#D4AF37] text-[#B8860B] px-4 py-2 rounded-full">+ AJOUTER</button></div>
-<div id="items" class="space-y-3"><div class="flex gap-3"><input name="nom" placeholder="Désignation" required class="flex-1 border rounded-2xl p-4 text-sm outline-none"><input name="qte" type="number" value="1" class="w-[80px] border rounded-2xl p-4 text-center"><input name="prix" type="number" placeholder="Prix" required class="w-[130px] border rounded-2xl p-4 text-sm"></div></div>
+<div class="flex justify-between items-center mb-5"><h2 class="text-[11px] font-bold tracking-[0.3em]">DÉTAILS</h2><button type="button" onclick="addItem()" class="text-[11px] font-bold border border-[#D4AF37] text-[#B8860B] px-4 py-2 rounded-full">+ LIGNE</button></div>
+<div id="items" class="space-y-3"><div class="grid grid-cols-[1fr_80px_120px] gap-3"><input name="nom" placeholder="Désignation *" required class="border rounded-2xl p-4 text-sm outline-none"><input name="qte" type="number" value="1" class="border rounded-2xl p-4 text-center text-sm"><input name="prix" type="number" placeholder="Prix *" required class="border rounded-2xl p-4 text-sm"></div></div>
 </div>
 
-<div class="grid grid-cols-3 gap-4 mt-10 p-5 bg-[#fcfbf7] rounded-2xl border border-[#efe9d7]">
-<div><label class="text-[10px] font-bold tracking-widest text-zinc-400">REMISE</label><input name="remise" type="number" value="0" class="w-full bg-white border rounded-xl p-3 text-sm mt-2"></div>
-<div><label class="text-[10px] font-bold tracking-widest text-zinc-400">TVA</label><select name="tva" class="w-full bg-white border rounded-xl p-3 text-sm mt-2"><option value="0">0%</option><option value="20" selected>20%</option><option value="10">10%</option></select></div>
-<div><label class="text-[10px] font-bold tracking-widest text-zinc-400">PAIEMENT</label><select name="paiement" class="w-full bg-white border rounded-xl p-3 text-sm mt-2"><option>Espèces</option><option>Virement</option><option>Chèque</option></select></div>
+<div class="grid grid-cols-3 gap-3 mt-10 bg-[#fcfbf7] border border-[#efe9d7] rounded-2xl p-5">
+<div><p class="text-[10px] font-bold tracking-widest text-zinc-400">REMISE</p><input name="remise" type="number" value="0" class="w-full bg-white border rounded-xl p-3 text-sm mt-2"></div>
+<div><p class="text-[10px] font-bold tracking-widest text-zinc-400">TVA</p><select name="tva" class="w-full bg-white border rounded-xl p-3 text-sm mt-2"><option value="0">0%</option><option value="20" selected>20%</option><option value="10">10%</option></select></div>
+<div><p class="text-[10px] font-bold tracking-widest text-zinc-400">PAIEMENT</p><select name="paiement" class="w-full bg-white border rounded-xl p-3 text-sm mt-2"><option>Espèces</option><option>Virement</option><option>Chèque</option></select></div>
 </div>
 
-<textarea name="notes" placeholder="Notes / Conditions..." class="w-full border rounded-2xl p-4 mt-6 text-sm h-24"></textarea>
-<button type="submit" class="w-full bg-black text-white rounded-full p-[18px] font-bold mt-8 tracking-[0.15em] text-[13px]">GÉNÉRER LA FACTURE</button>
-</div>
+<textarea name="notes" placeholder="Conditions, garantie, notes..." class="w-full border rounded-2xl p-4 mt-6 text-sm h-20 outline-none"></textarea>
+<button type="submit" class="w-full bg-black text-white rounded-full p-[18px] font-bold mt-8 tracking-[0.2em] text-[12px]">GÉNÉRER LA FACTURE</button>
 </form>
+</div>
+</div>
+
+<!-- RIGHT: HISTORIQUE EN SIDE -->
+<div class="space-y-6">
+<div class="bg-white rounded-[28px] border border-[#efe9d7] shadow-lg p-6 sticky top-6">
+<div class="flex justify-between items-center mb-5"><h3 class="text-[11px] font-bold tracking-[0.3em]">HISTORIQUE</h3><button type="button" onclick="clearHist()" class="text-[10px] text-zinc-400 underline">Effacer</button></div>
+<div id="historic" class="space-y-3 max-h-[60vh] overflow-y-auto">
+<p id="histEmpty" class="text-[13px] text-zinc-400 text-center py-10">Aucun historique<br><span class="text-[11px]">Vos sociétés apparaîtront ici</span></p>
+</div>
+<div class="mt-6 pt-6 border-t border-zinc-100">
+<p class="text-[10px] font-bold tracking-widest text-zinc-400 mb-3">APERÇU LOGO</p>
+<div id="logoSidePreview" class="w-full h-32 bg-[#fcfbf7] border-2 border-dashed border-[#efe9d7] rounded-2xl flex items-center justify-center"><span class="text-[11px] text-zinc-400">Aucun logo</span></div>
+<p class="text-[10px] text-zinc-400 mt-3 text-center">Cliquez sur le logo en haut à gauche pour changer</p>
+</div>
+<div class="mt-6 bg-black rounded-2xl p-5"><p class="text-[#D4AF37] text-[10px] tracking-[0.3em] font-bold">LUXURY TIP</p><p class="text-white text-[12px] mt-2 leading-6">Votre logo et infos sont sauvegardés automatiquement. L'historique vous permet de switcher entre sociétés en 1 clic.</p></div>
+</div>
+</div>
+
 </div>
 
 <script>
-const logoInput=document.getElementById('logoInput'),logoPreview=document.getElementById('logoPreview'),logoText=document.getElementById('logoText');
+const logoInput=document.getElementById('logoInput'),logoPreview=document.getElementById('logoPreview'),logoText=document.getElementById('logoText'),logoSide=document.getElementById('logoSidePreview');
 logoInput.addEventListener('change',e=>{const r=new FileReader();r.onload=()=>{localStorage.setItem('logo',r.result);showLogo()};r.readAsDataURL(e.target.files[0])});
-function showLogo(){const l=localStorage.getItem('logo');if(l){logoPreview.src=l;logoPreview.classList.remove('hidden');logoText.classList.add('hidden')}}showLogo();
+function showLogo(){const l=localStorage.getItem('logo');if(l){logoPreview.src=l;logoPreview.classList.remove('hidden');logoText.classList.add('hidden');logoSide.innerHTML=`<img src="${l}" class="w-full h-full object-contain p-2">`}else{logoSide.innerHTML='<span class="text-[11px] text-zinc-400">Aucun logo</span>'}}showLogo();
 
 const c=document.getElementById('company'),ic=document.getElementById('ice'),rcEl=document.getElementById('rc'),ad=document.getElementById('adresse'),tel=document.getElementById('tel'),em=document.getElementById('email'),waMy=document.getElementById('waMyLink'),clientTel=document.getElementById('clientTel'),waClient=document.getElementById('waClientLink');
 c.value=localStorage.getItem('company')||'';ic.value=localStorage.getItem('ice')||'';rcEl.value=localStorage.getItem('rc')||'';ad.value=localStorage.getItem('adresse')||'';tel.value=localStorage.getItem('tel')||'';em.value=localStorage.getItem('email')||'';
@@ -87,31 +87,26 @@ let hist=JSON.parse(localStorage.getItem('historic')||'[]');
 
 function renderHistoric(){
 const cont=document.getElementById('historic'),empty=document.getElementById('histEmpty');
-cont.querySelectorAll('.hist-chip').forEach(e=>e.remove());
+cont.querySelectorAll('.hist-card').forEach(e=>e.remove());
 if(hist.length==0){empty.classList.remove('hidden');return}
 empty.classList.add('hidden');
-hist.slice(0,6).forEach(h=>{
-const b=document.createElement('button');b.type='button';b.className='hist-chip bg-white border border-[#efe9d7] hover:border-[#D4AF37] px-4 py-2 rounded-full text-[12px] font-bold flex items-center gap-2 shadow-sm';
-b.innerHTML=`<span class="w-6 h-6 bg-black text-[#D4AF37] rounded-full flex items-center justify-center text-[10px]">${h.company[0]}</span> ${h.company.substring(0,18)}`;
-b.onclick=()=>{c.value=h.company;ic.value=h.ice;rcEl.value=h.rc;ad.value=h.adresse;tel.value=h.tel;em.value=h.email;save();updateWa()};
-cont.appendChild(b);
+hist.forEach(h=>{
+const div=document.createElement('div');div.className='hist-card bg-[#fcfbf7] hover:bg-white border border-[#efe9d7] hover:border-[#D4AF37] rounded-2xl p-4 cursor-pointer transition shadow-sm hover:shadow-md';
+div.innerHTML=`<div class="flex justify-between items-start"><div class="flex gap-3"><div class="w-10 h-10 bg-black text-[#D4AF37] rounded-xl flex items-center justify-center font-black text-xs">${h.company[0].toUpperCase()}</div><div><p class="font-bold text-[13px]">${h.company.substring(0,22)}</p><p class="text-[11px] text-zinc-500 mt-1">ICE: ${h.ice||'-'}</p><p class="text-[11px] text-zinc-400">${h.tel||''}</p></div></div><span class="text-[10px] text-[#B8860B] font-bold">↗</span></div>`;
+div.onclick=()=>{c.value=h.company;ic.value=h.ice;rcEl.value=h.rc;ad.value=h.adresse;tel.value=h.tel;em.value=h.email;save();updateWa();window.scrollTo({top:0,behavior:'smooth'})};
+cont.appendChild(div);
 })
 }
 renderHistoric();
 
 function updateWa(){
-if(tel.value.length>8){const num=tel.value.replace(/[^0-9]/g,'');waMy.href='https://wa.me/'+num;waMy.classList.remove('hidden');waMy.classList.add('flex')}else waMy.classList.add('hidden');
-if(clientTel.value.length>8){const num=clientTel.value.replace(/[^0-9]/g,'');waClient.href='https://wa.me/'+num+'?text=Salam, voici votre facture';waClient.classList.remove('hidden')}else waClient.classList.add('hidden');
+if(tel.value.length>8){waMy.href='https://wa.me/'+tel.value.replace(/[^0-9]/g,'');waMy.classList.remove('hidden')}else waMy.classList.add('hidden');
+if(clientTel.value.length>8){waClient.href='https://wa.me/'+clientTel.value.replace(/[^0-9]/g,'')+'?text=Salam';waClient.classList.remove('hidden')}else waClient.classList.add('hidden');
 }
 updateWa();
-
-function save(){
-localStorage.setItem('company',c.value);localStorage.setItem('ice',ic.value);localStorage.setItem('rc',rcEl.value);localStorage.setItem('adresse',ad.value);localStorage.setItem('tel',tel.value);localStorage.setItem('email',em.value);
-updateWa();
-if(c.value && !hist.find(x=>x.company==c.value)){hist.unshift({company:c.value,ice:ic.value,rc:rcEl.value,adresse:ad.value,tel:tel.value,email:em.value});localStorage.setItem('historic',JSON.stringify(hist.slice(0,10)));renderHistoric()}
-}
+function save(){localStorage.setItem('company',c.value);localStorage.setItem('ice',ic.value);localStorage.setItem('rc',rcEl.value);localStorage.setItem('adresse',ad.value);localStorage.setItem('tel',tel.value);localStorage.setItem('email',em.value);updateWa();if(c.value&&!hist.find(x=>x.company==c.value)){hist.unshift({company:c.value,ice:ic.value,rc:rcEl.value,adresse:ad.value,tel:tel.value,email:em.value});localStorage.setItem('historic',JSON.stringify(hist.slice(0,20)));renderHistoric()}}
 [c,ic,rcEl,ad,tel,em,clientTel].forEach(el=>el.addEventListener('input',save));
-function clearHist(){localStorage.removeItem('historic');hist=[];renderHistoric()}
-function addItem(){const d=document.createElement('div');d.className='flex gap-3';d.innerHTML='<input name="nom" placeholder="Désignation" required class="flex-1 border rounded-2xl p-4 text-sm"><input name="qte" type="number" value="1" class="w-[80px] border rounded-2xl p-4 text-center"><input name="prix" type="number" placeholder="Prix" required class="w-[130px] border rounded-2xl p-4 text-sm"><button type="button" onclick="this.parentElement.remove()" class="text-zinc-300 hover:text-red-400 px-2">✕</button>';document.getElementById('items').appendChild(d)}
+function clearHist(){if(confirm('Effacer historique?')){localStorage.removeItem('historic');hist=[];renderHistoric()}}
+function addItem(){const d=document.createElement('div');d.className='grid grid-cols-[1fr_80px_120px_30px] gap-3 items-center';d.innerHTML='<input name="nom" placeholder="Désignation" required class="border rounded-2xl p-4 text-sm"><input name="qte" type="number" value="1" class="border rounded-2xl p-4 text-center text-sm"><input name="prix" type="number" placeholder="Prix" required class="border rounded-2xl p-4 text-sm"><button type="button" onclick="this.parentElement.remove()" class="text-zinc-300 hover:text-red-400">✕</button>';document.getElementById('items').appendChild(d)}
 </script>
 </body></html>
