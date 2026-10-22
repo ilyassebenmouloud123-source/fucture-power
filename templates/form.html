@@ -2,33 +2,83 @@
 <html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FACTURE POWER - LUXURY</title><script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
-<style>body{font-family:'Manrope',sans-serif;background:#f8f7f3}.serif{font-family:'Cormorant Garamond',serif}.gold{color:#B8860B}.bg-gold{background:linear-gradient(135deg,#D4AF37,#B8860B)}</style>
+<style>body{font-family:'Manrope',sans-serif;background:#f8f7f3}.serif{font-family:'Cormorant Garamond',serif}.gold{color:#B8860B}</style>
 </head>
-<body class="min-h-screen p-4">
-<div class="max-w-2xl mx-auto bg-white rounded-[32px] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.15)] border border-[#efe9d7] overflow-hidden">
-<div class="p-8 flex items-center gap-3 border-b border-[#efe9d7]"><div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center text-[#D4AF37] font-black">FP</div><div><p class="font-black tracking-[0.2em] text-[13px]">FACTURE POWER</p><p class="text-[10px] tracking-[0.3em] gold">LUXURY EDITION</p></div></div>
+<body class="min-h-screen p-3 md:p-6">
+<div class="max-w-3xl mx-auto bg-white rounded-[32px] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.15)] border border-[#efe9d7] overflow-hidden">
+
+<!-- HEADER + LOGO UPLOAD -->
+<div class="p-8 border-b border-[#efe9d7] flex justify-between items-center">
+<div class="flex items-center gap-4">
+<label class="w-16 h-16 bg-black rounded-2xl flex items-center justify-center overflow-hidden cursor-pointer relative group">
+<img id="logoPreview" class="hidden w-full h-full object-cover">
+<span id="logoText" class="text-[#D4AF37] font-black text-xl">FP</span>
+<input type="file" id="logoInput" class="hidden" accept="image/*">
+<span class="absolute -bottom-1 -right-1 bg-[#D4AF37] text-[9px] w-5 h-5 rounded-full flex items-center justify-center">✎</span>
+</label>
+<div><p class="font-black tracking-[0.2em] text-[14px]">FACTURE POWER</p><p class="text-[10px] tracking-[0.3em] gold">LUXURY EDITION</p><p class="text-[10px] text-zinc-400 mt-1">كليكي على اللوغو باش تبدل الصورة</p></div>
+</div>
+<a id="waLink" target="_blank" class="hidden bg-green-500 text-white px-4 py-2 rounded-full text-xs font-bold">WhatsApp</a>
+</div>
+
 <div class="p-8">
-<form action="/facture" method="POST">
-<h2 class="font-bold text-[11px] tracking-[0.3em] mb-5">VOS INFOS PRIVÉ</h2>
-<input name="ent_nom" id="company" placeholder="Nom / Société" required class="w-full border border-[#efe9d7] rounded-2xl p-4 mb-3 bg-[#fcfbf7]">
-<input name="ent_ice" id="ice" placeholder="ICE" class="w-full border border-[#efe9d7] rounded-2xl p-4 mb-3 bg-[#fcfbf7]">
-<input name="ent_adresse" id="rc" placeholder="RC / IF / Adresse / Tél" class="w-full border border-[#efe9d7] rounded-2xl p-4 mb-6 bg-[#fcfbf7]">
+<form action="/facture" method="POST" id="mainForm">
+<h2 class="font-bold text-[11px] tracking-[0.3em] mb-3">VOS INFOS PRIVÉ</h2>
+<!-- HISTORIC -->
+<div id="historic" class="flex gap-2 mb-4 flex-wrap"></div>
 
-<h2 class="font-bold text-[11px] tracking-[0.3em] mb-5">CLIENT</h2>
-<input name="client" placeholder="Nom du client" required class="w-full border rounded-2xl p-4 mb-3">
-<input name="client_tel" placeholder="Tél Client" class="w-full border rounded-2xl p-4 mb-6">
+<input name="ent_nom" id="company" placeholder="Nom / Société *" required class="w-full border border-[#efe9d7] rounded-2xl p-4 mb-3 bg-[#fcfbf7] text-sm">
+<div class="grid grid-cols-2 gap-3 mb-3">
+<input name="ent_ice" id="ice" placeholder="ICE" class="border border-[#efe9d7] rounded-2xl p-4 bg-[#fcfbf7] text-sm">
+<input name="ent_rc" id="rc" placeholder="RC / IF" class="border border-[#efe9d7] rounded-2xl p-4 bg-[#fcfbf7] text-sm">
+</div>
+<input name="ent_adresse" id="adresse" placeholder="Adresse" class="w-full border border-[#efe9d7] rounded-2xl p-4 mb-3 bg-[#fcfbf7] text-sm">
+<div class="grid grid-cols-2 gap-3 mb-2">
+<input name="ent_tel" id="tel" placeholder="Tél / WhatsApp *" required class="border border-[#efe9d7] rounded-2xl p-4 bg-[#fcfbf7] text-sm">
+<input name="ent_email" id="email" placeholder="Email (optionnel)" class="border border-[#efe9d7] rounded-2xl p-4 bg-[#fcfbf7] text-sm">
+</div>
+<p class="text-[11px] text-zinc-400 text-center mb-8">كيتسجلو أوتوماتيك بلا ما تكليكي</p>
 
-<h2 class="font-bold text-[11px] tracking-[0.3em] mb-5">DÉTAILS</h2>
-<div id="items"><div class="flex gap-2 mb-2"><input name="nom" placeholder="Désignation" required class="flex-1 border rounded-2xl p-4"><input name="qte" type="number" value="1" class="w-20 border rounded-2xl p-4"><input name="prix" type="number" placeholder="Prix" required class="w-28 border rounded-2xl p-4"></div></div>
+<h2 class="font-bold text-[11px] tracking-[0.3em] mb-4">CLIENT</h2>
+<input name="client" placeholder="Nom du client *" required class="w-full border rounded-2xl p-4 mb-3 text-sm">
+<div class="grid grid-cols-2 gap-3 mb-8">
+<input name="client_tel" id="clientTel" placeholder="Tél Client" class="border rounded-2xl p-4 text-sm">
+<input name="client_ice" placeholder="ICE Client" class="border rounded-2xl p-4 text-sm">
+</div>
 
-<button type="submit" class="w-full bg-black text-white rounded-full p-4 font-bold mt-8 tracking-wide">GÉNÉRER FACTURE LUXURY →</button>
+<h2 class="font-bold text-[11px] tracking-[0.3em] mb-4">DÉTAILS FACTURE</h2>
+<div id="items">
+<div class="flex gap-2 mb-2"><input name="nom" placeholder="Désignation *" required class="flex-1 border rounded-2xl p-4 text-sm"><input name="qte" type="number" value="1" min="1" class="w-20 border rounded-2xl p-4 text-sm"><input name="prix" type="number" placeholder="Prix *" required class="w-28 border rounded-2xl p-4 text-sm"></div>
+</div>
+<button type="button" onclick="addItem()" class="text-xs gold font-bold mt-2">+ Ajouter une ligne</button>
+
+<div class="grid grid-cols-3 gap-3 mt-8">
+<div><label class="text-[10px] text-zinc-400">Remise %</label><input name="remise" type="number" value="0" class="w-full border rounded-xl p-3 text-sm"></div>
+<div><label class="text-[10px] text-zinc-400">TVA %</label><select name="tva" class="w-full border rounded-xl p-3 text-sm"><option value="0">0%</option><option value="20" selected>20%</option><option value="10">10%</option></select></div>
+<div><label class="text-[10px] text-zinc-400">Paiement</label><select name="paiement" class="w-full border rounded-xl p-3 text-sm"><option>Espèces</option><option>Virement</option><option>Chèque</option></select></div>
+</div>
+
+<textarea name="notes" placeholder="Notes / Conditions..." class="w-full border rounded-2xl p-4 mt-6 text-sm h-20"></textarea>
+
+<button type="submit" class="w-full bg-black text-white rounded-full p-4 font-bold mt-8 tracking-wide text-sm">GÉNÉRER FACTURE LUXURY →</button>
 </form>
-<p class="text-[11px] text-zinc-400 text-center mt-4">معلومات شركتك كيتسجلو أوتوماتيك - بلا بوطونات</p>
 </div>
 </div>
+
 <script>
-const c=document.getElementById('company'),i=document.getElementById('ice'),r=document.getElementById('rc');
-c.value=localStorage.getItem('company')||''; i.value=localStorage.getItem('ice')||''; r.value=localStorage.getItem('rc')||'';
-[c,i,r].forEach(el=>el.addEventListener('input',()=>{localStorage.setItem('company',c.value);localStorage.setItem('ice',i.value);localStorage.setItem('rc',r.value)}));
-</script>
-</body></html>
+// LOGO
+const logoInput=document.getElementById('logoInput'),logoPreview=document.getElementById('logoPreview'),logoText=document.getElementById('logoText');
+logoInput.addEventListener('change',e=>{const r=new FileReader();r.onload=()=>{localStorage.setItem('logo',r.result);showLogo()};r.readAsDataURL(e.target.files[0])});
+function showLogo(){const l=localStorage.getItem('logo');if(l){logoPreview.src=l;logoPreview.classList.remove('hidden');logoText.classList.add('hidden')}}showLogo();
+
+// HISTORIC + AUTO SAVE + WHATSAPP
+const c=document.getElementById('company'),ic=document.getElementById('ice'),rcEl=document.getElementById('rc'),ad=document.getElementById('adresse'),tel=document.getElementById('tel'),em=document.getElementById('email'),waLink=document.getElementById('waLink');
+c.value=localStorage.getItem('company')||'';ic.value=localStorage.getItem('ice')||'';rcEl.value=localStorage.getItem('rc')||'';ad.value=localStorage.getItem('adresse')||'';tel.value=localStorage.getItem('tel')||'';em.value=localStorage.getItem('email')||'';
+let hist=JSON.parse(localStorage.getItem('historic')||'[]');
+function renderHistoric(){const d=document.getElementById('historic');d.innerHTML='';hist.slice(0,5).forEach(h=>{const b=document.createElement('button');b.type='button';b.innerText=h.company;b.className='text-[11px] bg-[#fcf9ef] border border-[#efe9d7] px-3 py-1.5 rounded-full';b.onclick=()=>{c.value=h.company;ic.value=h.ice;rcEl.value=h.rc;ad.value=h.adresse;tel.value=h.tel;em.value=h.email;save()};d.appendChild(b)})}
+renderHistoric();
+function updateWa(){if(tel.value){waLink.href='https://wa.me/'+tel.value.replace(/[^0-9]/g,'');waLink.classList.remove('hidden')}else waLink.classList.add('hidden')}
+updateWa();
+function save(){localStorage.setItem('company',c.value);localStorage.setItem('ice',ic.value);localStorage.setItem('rc',rcEl.value);localStorage.setItem('adresse',ad.value);localStorage.setItem('tel',tel.value);localStorage.setItem('email',em.value);updateWa();if(c.value&&!hist.find(x=>x.company==c.value)){hist.unshift({company:c.value,ice:ic.value,rc:rcEl.value,adresse:ad.value,tel:tel.value,email:em.value});localStorage.setItem('historic',JSON.stringify(hist.slice(0,10)));renderHistoric()}}
+[c,ic,rcEl,ad,tel,em].forEach(el=>el.addEventListener('input',save));
+function addItem(){const div=document.createElement('div
