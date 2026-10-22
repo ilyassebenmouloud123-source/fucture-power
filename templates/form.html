@@ -4,19 +4,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800;900&display=swap" rel="stylesheet">
 <style>body{font-family:'Manrope',sans-serif}</style></head>
 <body class="bg-[#eef2ff] min-h-screen">
-<nav class="bg-white border-b sticky top-0 z-10"><div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-black flex items-center justify-center text-white font-black">FP</div><b>FACTURE <span class="text-blue-600">POWER PRO</span></b><span class="text-[10px] bg-black text-white px-2.5 py-1 rounded-full tracking-widest">ALL OPTIONS</span></div><button onclick="localStorage.clear();location.reload()" class="text-xs text-zinc-400 underline">Effacer mes infos</button></div></nav>
+<nav class="bg-white border-b sticky top-0 z-10"><div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-black flex items-center justify-center text-white font-black">FP</div><b>FACTURE <span class="text-blue-600">POWER PRO</span></b><span class="text-[10px] bg-black text-white px-2.5 py-1 rounded-full">ALL OPTIONS</span></div><button onclick="if(confirm('مسح كلشي؟')){localStorage.clear();location.reload()}" class="text-xs text-zinc-400 underline">Effacer mes infos</button></div></nav>
 
-<div class="max-w-3xl mx-auto px-6 py-8">
-<div class="bg-white rounded-[28px] shadow-[0_20px_60px_-20px_rgba(0,0,0,0.2)] p-8 border">
+<div class="max-w-6xl mx-auto px-6 py-8 grid lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 bg-white rounded-[28px] shadow-[0_20px_60px_-20px_rgba(0,0,0,0.2)] p-8 border">
 <h1 class="text-2xl font-black">Nouvelle facture PRO</h1>
-<p class="text-sm text-zinc-500 mt-2">Créez une facture pro en 30 secondes. Vos infos restent chez vous.</p>
+<p class="text-sm text-zinc-500 mt-2">Logo + Historique + WhatsApp - Tout est privé chez vous.</p>
 
 <form method="POST" action="/create" class="space-y-6 mt-8" id="f">
+<input type="hidden" name="ent_logo_data" id="ent_logo_data">
 
-<!-- HADI HI LI BGHITI NTA -->
 <div class="bg-[#fcf9ef] rounded-2xl p-5 border border-[#efe9d7]">
-<div class="flex justify-between items-center mb-3"><p class="text-[11px] font-black tracking-[0.2em] text-black">VOS INFOS - VOTRE ENTREPRISE</p><span class="text-[9px] bg-[#D4AF37] text-white px-3 py-1.5 rounded-full font-black tracking-widest">PRIVÉ - RESTE CHEZ VOUS</span></div>
-<p class="text-[11px] text-zinc-500 mb-4 leading-5">C'est vous le prestataire. Remplissez une seule fois, ça restera enregistré sur votre navigateur. Vos clients ne verront que le résultat final.</p>
+<div class="flex justify-between items-center mb-3"><p class="text-[11px] font-black tracking-[0.2em]">VOS INFOS - VOTRE ENTREPRISE</p><span class="text-[9px] bg-[#D4AF37] text-white px-3 py-1.5 rounded-full font-black">PRIVÉ - RESTE CHEZ VOUS</span></div>
+<p class="text-[11px] text-zinc-500 mb-4">C'est vous le prestataire. Remplissez une seule fois.</p>
+
+<!-- LOGO UPLOAD - JEDID -->
+<div class="mb-4 flex items-center gap-4">
+<div id="logoPreview" class="w-16 h-16 rounded-xl bg-white border border-dashed flex items-center justify-center text-[10px] text-zinc-400 overflow-hidden">LOGO</div>
+<div><label class="text-xs font-bold bg-black text-white px-3 py-2 rounded-lg cursor-pointer">📸 Ajouter votre logo<input type="file" id="logoInput" accept="image/*" class="hidden"></label><p class="text-[10px] text-zinc-400 mt-1">Sera affiché sur la facture</p></div>
+</div>
+
 <div class="grid grid-cols-2 gap-3">
 <input id="ent_nom" name="ent_nom" placeholder="Votre nom / société *" required class="col-span-2 px-4 py-3.5 rounded-xl border bg-white font-bold border-zinc-900">
 <input id="ent_ice" name="ent_ice" placeholder="Votre ICE / IF" class="px-4 py-3.5 rounded-xl border bg-white">
@@ -25,26 +32,36 @@
 </div>
 </div>
 
-<div class="grid grid-cols-2 gap-3"><input name="client" placeholder="Nom du client *" required class="px-4 py-3.5 rounded-xl bg-white border-2 border-zinc-900 font-bold"><input name="client_tel" placeholder="Tél client" class="px-4 py-3.5 rounded-xl bg-white border"><input name="numero" value="FAC-2026-001" class="px-4 py-3.5 rounded-xl bg-white border text-sm"><input name="date" type="date" class="px-4 py-3.5 rounded-xl bg-white border"></div>
+<div class="grid grid-cols-2 gap-3"><input name="client" id="clientName" placeholder="Nom du client *" required class="px-4 py-3.5 rounded-xl bg-white border-2 border-zinc-900 font-bold"><input name="client_tel" id="clientTel" placeholder="Tél client (WhatsApp)" class="px-4 py-3.5 rounded-xl bg-white border"><input name="numero" value="FAC-2026-001" class="px-4 py-3.5 rounded-xl bg-white border text-sm"><input name="date" type="date" class="px-4 py-3.5 rounded-xl bg-white border"></div>
 
-<div><p class="font-bold text-sm mb-2">Articles / Prestations</p><div id="items" class="space-y-2"><div class="flex gap-2"><input name="nom[]" placeholder="Désignation *" required class="flex-1 px-4 py-3.5 rounded-xl bg-zinc-900 text-white placeholder-zinc-400"><input name="qte[]" type="number" value="1" class="w-20 px-3 py-3.5 rounded-xl bg-zinc-900 text-white text-center"><input name="prix[]" type="number" placeholder="Prix" required class="w-28 px-3 py-3.5 rounded-xl bg-zinc-900 text-white text-center placeholder-zinc-400"></div></div><button type="button" onclick="addItem()" class="mt-3 w-full border-2 border-dashed border-zinc-200 rounded-xl py-3 font-bold text-zinc-500 text-sm hover:bg-zinc-50">+ Ajouter un article</button></div>
+<div><p class="font-bold text-sm mb-2">Articles</p><div id="items" class="space-y-2"><div class="flex gap-2"><input name="nom[]" placeholder="Désignation *" required class="flex-1 px-4 py-3.5 rounded-xl bg-zinc-900 text-white"><input name="qte[]" type="number" value="1" class="w-20 px-3 py-3.5 rounded-xl bg-zinc-900 text-white text-center"><input name="prix[]" type="number" placeholder="Prix" required class="w-28 px-3 py-3.5 rounded-xl bg-zinc-900 text-white text-center"></div></div><button type="button" onclick="addItem()" class="mt-3 w-full border-2 border-dashed rounded-xl py-3 font-bold text-zinc-500">+ Article</button></div>
 
-<div class="grid grid-cols-3 gap-3">
-<select name="tva" class="px-3 py-3.5 rounded-xl border bg-white text-sm font-bold"><option value="20">TVA 20%</option><option value="10">TVA 10%</option><option value="7">TVA 7%</option><option value="14">TVA 14%</option><option value="0">Sans TVA</option></select>
-<input name="remise" type="number" placeholder="Remise %" value="0" class="px-3 py-3.5 rounded-xl border bg-white text-sm">
-<select name="paiement" class="px-3 py-3.5 rounded-xl border bg-white text-sm"><option>Espèces</option><option>Virement</option><option>Wafacash</option><option>Chèque</option></select>
-</div>
-
-<textarea name="notes" placeholder="Notes / Merci pour votre confiance..." class="w-full px-4 py-3 rounded-xl border bg-white h-20 text-sm"></textarea>
-<button class="w-full bg-black text-white rounded-2xl p-4 font-black text-[15px] tracking-wide shadow-[0_10px_30px_-10px_black] hover:bg-zinc-900">⚡ GÉNÉRER LA FACTURE PRO</button>
-<p class="text-center text-[10px] text-zinc-400 tracking-widest">FACTURE POWER • OUTIL GRATUIT POUR LES PROS</p>
+<div class="grid grid-cols-3 gap-3"><select name="tva" class="px-3 py-3.5 rounded-xl border bg-white text-sm font-bold"><option value="20">TVA 20%</option><option value="0">Sans TVA</option><option value="10">TVA 10%</option></select><input name="remise" type="number" placeholder="Remise %" value="0" class="px-3 py-3.5 rounded-xl border bg-white text-sm"><select name="paiement" class="px-3 py-3.5 rounded-xl border bg-white text-sm"><option>Espèces</option><option>Virement</option><option>Wafacash</option><option>Chèque</option></select></div>
+<textarea name="notes" placeholder="Notes..." class="w-full px-4 py-3 rounded-xl border bg-white h-20 text-sm"></textarea>
+<button class="w-full bg-black text-white rounded-2xl p-4 font-black">⚡ GÉNÉRER LA FACTURE PRO</button>
 </form>
 </div>
+
+<!-- HISTORIQUE SIDEBAR -->
+<div class="space-y-4">
+<div class="bg-black text-white rounded-[28px] p-6"><p class="font-bold">Pour qui ?</p><ul class="text-sm text-zinc-400 mt-4 space-y-2"><li>✓ Vos infos = privées</li><li>✓ Logo sur facture</li><li>✓ Historique local</li><li>✓ Envoi WhatsApp</li></ul></div>
+<div class="bg-white rounded-[28px] p-6 border"><div class="flex justify-between items-center"><p class="font-black text-sm">📂 HISTORIQUE</p><button onclick="clearHist()" class="text-[10px] text-red-400 underline">Effacer</button></div><div id="histList" class="mt-4 space-y-2 text-xs text-zinc-500">Aucune facture encore</div></div>
 </div>
 </div>
 
 <script>
-function addItem(){document.getElementById('items').insertAdjacentHTML('beforeend',`<div class="flex gap-2 mt-2"><input name="nom[]" placeholder="Désignation *" required class="flex-1 px-4 py-3.5 rounded-xl bg-zinc-900 text-white placeholder-zinc-400"><input name="qte[]" type="number" value="1" class="w-20 px-3 py-3.5 rounded-xl bg-zinc-900 text-white text-center"><input name="prix[]" type="number" placeholder="Prix" required class="w-28 px-3 py-3.5 rounded-xl bg-zinc-900 text-white text-center placeholder-zinc-400"></div>`)}
-const ids=['ent_nom','ent_ice','ent_tel','ent_adresse'];ids.forEach(id=>{let el=document.getElementById(id);let v=localStorage.getItem(id);if(v) el.value=v;el.addEventListener('input',()=>localStorage.setItem(id,el.value))});
+function addItem(){document.getElementById('items').insertAdjacentHTML('beforeend',`<div class="flex gap-2 mt-2"><input name="nom[]" placeholder="Désignation *" required class="flex-1 px-4 py-3.5 rounded-xl bg-zinc-900 text-white"><input name="qte[]" type="number" value="1" class="w-20 px-3 py-3.5 rounded-xl bg-zinc-900 text-white text-center"><input name="prix[]" type="number" placeholder="Prix" required class="w-28 px-3 py-3.5 rounded-xl bg-zinc-900 text-white text-center"></div>`)}
+const ids=['ent_nom','ent_ice','ent_tel','ent_adresse'];ids.forEach(id=>{let el=document.getElementById(id);if(!el) return;el.value=localStorage.getItem(id)||'';el.addEventListener('input',()=>localStorage.setItem(id,el.value))});
+
+// LOGO
+const logoInput=document.getElementById('logoInput'), logoPrev=document.getElementById('logoPreview'), logoData=document.getElementById('ent_logo_data');
+let savedLogo=localStorage.getItem('ent_logo');if(savedLogo){logoPrev.innerHTML=`<img src="${savedLogo}" class="w-full h-full object-contain">`;logoData.value=savedLogo;}
+logoInput.addEventListener('change',e=>{let file=e.target.files[0];if(!file) return;let r=new FileReader();r.onload=ev=>{let b64=ev.target.result;logoPrev.innerHTML=`<img src="${b64}" class="w-full h-full object-contain">`;localStorage.setItem('ent_logo',b64);logoData.value=b64;};r.readAsDataURL(file);});
+
+// HISTORIQUE
+function renderHist(){let h=JSON.parse(localStorage.getItem('facture_history')||'[]');let c=document.getElementById('histList');if(!h.length){c.innerHTML='Aucune facture encore';return;}c.innerHTML=h.slice().reverse().slice(0,10).map(x=>`<div class="p-2 bg-zinc-50 rounded-lg flex justify-between"><span><b>${x.client}</b> - ${x.num}</span><span>${x.total} DH</span></div>`).join('');}
+function clearHist(){if(confirm('Effacer historique?')){localStorage.removeItem('facture_history');renderHist();}}
+renderHist();
+document.getElementById('f').addEventListener('submit',()=>{let client=document.getElementById('clientName').value;let num=document.querySelector('[name=numero]').value;let hist=JSON.parse(localStorage.getItem('facture_history')||'[]');hist.push({client,num,total:'...',date:new Date().toLocaleDateString()});localStorage.setItem('facture_history',JSON.stringify(hist));});
 </script>
 </body></html>
