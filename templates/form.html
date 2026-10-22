@@ -1,41 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FACTURE POWER PRO</title><script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&display=swap" rel="stylesheet">
-<style>body{font-family:'Manrope',sans-serif}</style></head>
-<body class="bg-[#eef2ff] min-h-screen">
-<nav class="bg-white border-b sticky top-0 z-10"><div class="max-w-6xl mx-auto px-6 py-4 flex justify-between"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-black flex items-center justify-center text-white font-black">FP</div><b>FACTURE <span class="text-blue-600">POWER PRO</span></b><span class="text-[10px] bg-black text-white px-2 py-1 rounded-full">ALL OPTIONS</span></div><button onclick="localStorage.clear();location.reload()" class="text-xs text-gray-400">Reset</button></div></nav>
-<div class="max-w-6xl mx-auto px-6 py-8 grid lg:grid-cols-3 gap-6">
-<div class="lg:col-span-2 bg-white rounded-[28px] shadow-xl p-8">
-<h1 class="text-2xl font-black mb-6">Nouvelle facture PRO</h1>
-<form method="POST" action="/create" class="space-y-6" id="f">
-<!-- ENTREPRISE -->
-<div class="bg-zinc-50 rounded-2xl p-5 border"><p class="text-[11px] font-bold tracking-widest text-gray-400 mb-3">MON ENTREPRISE (reste enregistré)</p><div class="grid grid-cols-2 gap-3">
-<input id="ent_nom" name="ent_nom" placeholder="Nom entreprise" class="col-span-2 px-4 py-3 rounded-xl border bg-white">
-<input id="ent_ice" name="ent_ice" placeholder="ICE / IF" class="px-4 py-3 rounded-xl border bg-white">
-<input id="ent_tel" name="ent_tel" placeholder="Téléphone" class="px-4 py-3 rounded-xl border bg-white">
-<input id="ent_adresse" name="ent_adresse" placeholder="Adresse" class="col-span-2 px-4 py-3 rounded-xl border bg-white">
-</div></div>
-<!-- CLIENT -->
-<div class="grid grid-cols-2 gap-3"><input name="client" placeholder="Client *" required class="px-4 py-3.5 rounded-xl bg-white border-2 border-zinc-900 font-bold">
-<input name="client_tel" placeholder="Tél client" class="px-4 py-3.5 rounded-xl bg-zinc-50 border">
-<input name="numero" value="FAC-2026-001" class="px-4 py-3.5 rounded-xl bg-zinc-50 border">
-<input name="date" type="date" class="px-4 py-3.5 rounded-xl bg-zinc-50 border"></div>
-<!-- ITEMS -->
-<div><p class="font-bold text-sm mb-2">Articles</p><div id="items" class="space-y-2"><div class="flex gap-2"><input name="nom[]" placeholder="Désignation" required class="flex-1 px-4 py-3 rounded-xl bg-zinc-900 text-white"><input name="qte[]" type="number" value="1" class="w-20 px-3 py-3 rounded-xl bg-zinc-900 text-white text-center"><input name="prix[]" type="number" placeholder="Prix" required class="w-28 px-3 py-3 rounded-xl bg-zinc-900 text-white text-center"></div></div><button type="button" onclick="addItem()" class="mt-3 w-full border-2 border-dashed rounded-xl py-3 font-bold text-zinc-500">+ Article</button></div>
-<!-- OPTIONS -->
-<div class="grid grid-cols-3 gap-3"><select name="tva" class="px-3 py-3 rounded-xl border bg-white"><option value="20">TVA 20%</option><option value="10">TVA 10%</option><option value="7">TVA 7%</option><option value="14">TVA 14%</option><option value="0">Sans TVA</option></select>
-<input name="remise" type="number" placeholder="Remise %" value="0" class="px-3 py-3 rounded-xl border bg-white">
-<select name="paiement" class="px-3 py-3 rounded-xl border bg-white"><option>Espèces</option><option>Virement</option><option>Wafacash</option><option>Chèque</option></select></div>
-<textarea name="notes" placeholder="Notes / Conditions de paiement / Merci..." class="w-full px-4 py-3 rounded-xl border bg-zinc-50 h-20"></textarea>
-<button class="w-full bg-gradient-to-r from-blue-600 to-black text-white rounded-xl p-4 font-black text-lg shadow-lg">⚡ Générer Facture PRO</button>
-</form>
+<div class="bg-zinc-50 rounded-2xl p-5 border border-zinc-100">
+  <p class="text-[11px] font-black tracking-widest text-black mb-1">VOS INFOS - Votre entreprise</p>
+  <p class="text-[10px] text-zinc-500 mb-3">Ces infos sont les vôtres, elles restent enregistrées sur votre appareil (privé). Vous les remplissez une seule fois.</p>
+  <div class="grid grid-cols-2 gap-3">
+    <input id="ent_nom" name="ent_nom" placeholder="Votre nom / société *" class="col-span-2 px-4 py-3 rounded-xl border bg-white">
+    <input id="ent_ice" name="ent_ice" placeholder="Votre ICE / IF" class="px-4 py-3 rounded-xl border bg-white">
+    <input id="ent_tel" name="ent_tel" placeholder="Votre téléphone" class="px-4 py-3 rounded-xl border bg-white">
+    <input id="ent_adresse" name="ent_adresse" placeholder="Votre adresse" class="col-span-2 px-4 py-3 rounded-xl border bg-white">
+  </div>
 </div>
-<div class="bg-black text-white rounded-[28px] p-6 h-fit"><p class="font-bold">Options activées:</p><ul class="text-sm text-zinc-400 mt-4 space-y-2"><li>✓ ICE / Tel auto-save</li><li>✓ TVA & Remise</li><li>✓ Mode paiement</li><li>✓ Notes & conditions</li><li>✓ Sans .0 (480 DH)</li><li>✓ Impression pro</li></ul><p class="text-xs text-zinc-500 mt-8">Les infos de ton entreprise restent enregistrées dans ton navigateur.</p></div>
-</div>
-<script>
-function addItem(){document.getElementById('items').innerHTML+=`<div class="flex gap-2 mt-2"><input name="nom[]" placeholder="Désignation" required class="flex-1 px-4 py-3 rounded-xl bg-zinc-900 text-white"><input name="qte[]" type="number" value="1" class="w-20 px-3 py-3 rounded-xl bg-zinc-900 text-white text-center"><input name="prix[]" type="number" placeholder="Prix" required class="w-28 px-3 py-3 rounded-xl bg-zinc-900 text-white text-center"></div>`}
-const ids=['ent_nom','ent_ice','ent_tel','ent_adresse'];ids.forEach(id=>{let el=document.getElementById(id);el.value=localStorage.getItem(id)||'';el.addEventListener('input',()=>localStorage.setItem(id,el.value))});
-document.getElementById('f').addEventListener('input',()=>{document.getElementById('items').querySelectorAll('input').forEach(()=>{})});
-</script>
-</body></html>
