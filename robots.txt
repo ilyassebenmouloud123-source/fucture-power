@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://facture-power.vercel.app/sitemap.xml
