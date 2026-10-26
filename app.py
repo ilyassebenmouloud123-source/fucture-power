@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory
 
 app = Flask(__name__)
 
@@ -10,13 +10,16 @@ def home():
 def form_page():
     return render_template('form.html')
 
+@app.route('/robots.txt')
+def robots():
+    return send_from_directory('.', 'robots.txt')
+
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory('.', 'sitemap.xml')
+
 @app.route('/facture')
 def facture_page():
-    return render_template('facture.html')
-
-@app.route('/generate', methods=['POST'])
-def generate():
-    # كيخلي الفورم يخدم كيف ما كان
     return render_template('facture.html')
 
 if __name__ == '__main__':
