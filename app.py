@@ -21,6 +21,9 @@ def sitemap():
 @app.route('/facture')
 def facture_page():
     return render_template('facture.html')
+@app.route('/google0e59c1123d53e92c.html')
+def google_verify():
+    return 'google-site-verification: google0e59c1123d53e92c.html'
 
 if __name__ == '__main__':
     app.run(debug=True)
