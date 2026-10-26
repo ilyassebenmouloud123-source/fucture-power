@@ -1,113 +1,60 @@
-from flask import Flask, render_template, request
-from datetime import datetime
-import re
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FACTURE POWER - Luxury Edition</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{font-family:'Inter',sans-serif;background:#f6f5f1}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif}
+</style>
+</head>
+<body>
 
-app = Flask(__name__)
+<header class="bg-black text-white mx-4 md:mx-6 mt-4 md:mt-6 rounded-[22px] flex justify-between items-center px-5 py-4 sticky top-4 z-50">
+<div class="flex items-center gap-3">
+<div class="bg-[#1e1e1e] w-10 h-10 rounded-[12px] flex items-center justify-center text-[#ffcc00] font-bold border border-white/10">FP</div>
+<div><p class="font-bold tracking-[0.2em] text-[11px]">FACTURE POWER</p><p class="text-[#ffcc00] text-[9px] tracking-[0.35em]">LUXURY EDITION</p></div>
+</div>
+<a href="/form" class="bg-white text-black text-[11px] font-bold px-5 py-2.5 rounded-full">CRÉER UNE FACTURE →</a>
+</header>
 
-@app.route('/')
-def index():
-    return render_template('form.html')
+<section class="max-w-6xl mx-auto text-center pt-20 md:pt-28 px-6">
+<div class="inline-flex bg-white border border-black/5 rounded-full px-4 py-1.5 text-[10px] tracking-widest">MADE FOR ARTISANS MAROCAINS</div>
+<h1 class="text-5xl md:text-[84px] font-bold leading-[0.85] mt-6 tracking-tight">Créez une<br>facture <span class="bg-black text-[#ffcc00] px-4 rounded-[16px] inline-block rotate-[-2deg]">PRO</span><br>en 30 secondes.</h1>
+<p class="text-zinc-500 mt-6 max-w-2xl mx-auto text-[16px] leading-relaxed">Fini Word et Excel. Le seul générateur avec ICE, RC, IF, Logo, TVA, remise automatique et envoi WhatsApp direct. Design qui impressionne vos clients.</p>
+<div class="flex flex-col md:flex-row gap-3 justify-center mt-10">
+<a href="/form" class="bg-black text-white px-10 py-4 rounded-[16px] font-bold text-[16px]">+ Nouvelle facture gratuite</a>
+<p class="text-[11px] text-zinc-400 mt-3 md:mt-0 md:ml-2 flex items-center">✓ Sans inscription ✓ PDF instantané ✓ 100% gratuit</p>
+</div>
+</section>
 
-@app.route('/facture', methods=['POST'])
-def facture():
-    try:
-        # 1. ENTREPRISE
-        ent_nom = request.form.get('ent_nom', 'Mon Entreprise').strip()
-        ent_ice = request.form.get('ent_ice', '').strip()
-        ent_rc = request.form.get('ent_rc', '').strip()
-        ent_adresse = request.form.get('ent_adresse', '').strip()
-        ent_tel = request.form.get('ent_tel', '').strip()
-        ent_email = request.form.get('ent_email', '').strip()
+<section class="max-w-6xl mx-auto mt-20 px-6 grid md:grid-cols-3 gap-4">
+<div class="bg-white rounded-[20px] p-6 border border-black/5"><p class="text-2xl">⚡</p><h3 class="font-bold mt-3">Ultra Rapide</h3><p class="text-sm text-zinc-500 mt-1">Remplissez 3 champs, le reste se fait tout seul. Historique sauvegardé à droite.</p></div>
+<div class="bg-white rounded-[20px] p-6 border border-black/5"><p class="text-2xl">🎨</p><h3 class="font-bold mt-3">Design LUXURY</h3><p class="text-sm text-zinc-500 mt-1">Noir & Or, pro et clean. Votre client voit que vous êtes sérieux.</p></div>
+<div class="bg-black rounded-[20px] p-6 text-white"><p class="text-2xl">📲</p><h3 class="font-bold mt-3 text-[#ffcc00]">Envoi WhatsApp</h3><p class="text-sm text-zinc-400 mt-1">Un clic et la facture part directement chez le client avec votre logo.</p></div>
+</section>
 
-        # 2. CLIENT
-        client = request.form.get('client', 'Client').strip()
-        client_tel = request.form.get('client_tel', '').strip()
-        client_ice = request.form.get('client_ice', '').strip()
+<section class="max-w-6xl mx-auto mt-24 px-6">
+<h2 class="text-4xl font-bold">Comment ça marche ?</h2>
+<div class="grid md:grid-cols-3 gap-8 mt-10">
+<div><div class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-bold">1</div><h3 class="font-bold mt-4">Infos Pro</h3><p class="text-sm text-zinc-500 mt-2">Mettez votre nom, ICE, RC/IF, téléphone. Une seule fois, ça reste enregistré.</p></div>
+<div><div class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-bold">2</div><h3 class="font-bold mt-4">Infos Client + Prestations</h3><p class="text-sm text-zinc-500 mt-2">Ajoutez le client, les articles, quantité, TVA et remise automatique.</p></div>
+<div><div class="w-10 h-10 rounded-full bg-[#ffcc00] text-black flex items-center justify-center font-bold">3</div><h3 class="font-bold mt-4">PDF + WhatsApp</h3><p class="text-sm text-zinc-500 mt-2">Cliquez sur Générer. Téléchargez le PDF LUXURY et envoyez-le par WhatsApp.</p></div>
+</div>
+</section>
 
-        # 3. ITEMS - LUXURY FORMAT
-        noms = request.form.getlist('nom')
-        qtes = request.form.getlist('qte')
-        prixs = request.form.getlist('prix')
+<section class="max-w-6xl mx-auto mt-24 px-6 bg-white rounded-[28px] p-8 md:p-12 border border-black/5">
+<h2 class="text-3xl font-bold">Tout ce qu'il vous faut pour être pro</h2>
+<div class="grid md:grid-cols-2 gap-6 mt-8 text-sm">
+<p>✓ Logo de votre entreprise cliquable</p><p>✓ ICE / RC / IF / ICE obligatoires</p><p>✓ Calcul TVA automatique (20%, 10%...)</p><p>✓ Remise en % ou DH</p><p>✓ Numérotation auto FACT-2025-001</p><p>✓ Historique à droite (jamais perdu)</p><p>✓ Email pro optionnel</p><p>✓ 100% Mobile - marche sur téléphone</p>
+</div>
+<div class="mt-10"><a href="/form" class="bg-black text-white px-8 py-4 rounded-[14px] font-bold inline-block">Commencer maintenant →</a></div>
+</section>
 
-        items_html = ""
-        sous_total = 0
+<footer class="text-center text-[11px] text-zinc-400 py-12 tracking-widest">FACTURE POWER © 2026 - LUXURY EDITION FOR MOROCCAN PROS</footer>
 
-        for i in range(len(noms)):
-            n = noms[i].strip()
-            if not n:
-                continue
-            try:
-                q = int(qtes[i]) if i < len(qtes) and qtes[i] else 1
-                p = float(prixs[i]) if i < len(prixs) and prixs[i] else 0
-            except:
-                q = 1
-                p = 0
-            
-            ligne_total = q * p
-            sous_total += ligne_total
-
-            # LUXURY ROW - متوافق مع facture.html luxury
-            items_html += f"""
-            <div class='grid grid-cols-[1fr_70px_110px] p-4 items-center hover:bg-[#fcfbf7] transition'>
-                <span class='font-medium text-[14px] text-black capitalize'>{n}</span>
-                <span class='text-center text-[13px] text-zinc-600'>{q}</span>
-                <span class='text-right font-bold text-[14px] text-black'>{ligne_total:.2f} DH</span>
-            </div>
-            """
-
-        if not items_html:
-            items_html = "<div class='p-4 text-center text-zinc-400 text-sm'>Aucun article</div>"
-
-        # 4. CALCULS
-        remise = float(request.form.get('remise', 0) or 0)
-        tva_pct = float(request.form.get('tva', 0) or 0)
-        
-        remise_val = sous_total * remise / 100
-        base_ht = sous_total - remise_val
-        tva_val = base_ht * tva_pct / 100
-        total = base_ht + tva_val
-
-        # 5. NUMERO + DATE
-        now = datetime.now()
-        numero = f"FAC-{now.strftime('%Y%m%d-%H%M')}"
-        date = now.strftime('%d/%m/%Y')
-        
-        notes = request.form.get('notes', '').strip()
-        paiement = request.form.get('paiement', 'Espèces')
-
-        # Nettoyage tel pour WhatsApp
-        def clean_tel(t):
-            return re.sub(r'[^0-9]', '', t)
-
-        return render_template('facture.html',
-            numero=numero,
-            date=date,
-            ent_nom=ent_nom,
-            ent_ice=ent_ice,
-            ent_rc=ent_rc,
-            ent_adresse=ent_adresse,
-            ent_tel=ent_tel,
-            ent_email=ent_email,
-            client=client,
-            client_tel=clean_tel(client_tel),
-            client_ice=client_ice,
-            items_html=items_html,
-            sous_total=f"{sous_total:.2f}",
-            total=f"{total:.2f}",
-            notes=notes if notes else f"Paiement: {paiement}. Merci pour votre confiance.",
-            paiement=paiement
-        )
-
-    except Exception as e:
-        return f"""
-        <h1>Erreur: {str(e)}</h1>
-        <p>Vérifie app.py et facture.html</p>
-        <a href='/'>Retour</a>
-        <pre>{str(e)}</pre>
-        """
-
-# Pour Vercel
-app = app
-
-if __name__ == '__main__':
-    app.run(debug=True)
+</body>
+</html>
