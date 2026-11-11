@@ -3,25 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FACTURE POWER - PRO</title>
+<title>FACTURE POWER - LUXURY</title>
 <style>
-body{font-family:Arial;background:#0f172a;color:white;padding:20px}
-.box{max-width:500px;margin:auto;background:#1e293b;padding:20px;border-radius:15px}
-input{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:none;box-sizing:border-box}
-button{width:100%;padding:14px;background:#22c55e;color:white;border:none;border-radius:10px;font-size:18px;font-weight:bold;cursor:pointer}
-h1{text-align:center;color:#22c55e}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Segoe UI',Arial;background:radial-gradient(circle at top,#1a1a1a,#000);color:white;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{width:100%;max-width:480px;background:linear-gradient(145deg,#161616,#0a0a0a);border:1px solid #d4af37;padding:30px;border-radius:22px;box-shadow:0 20px 60px rgba(212,175,55,.25)}
+.logo{text-align:center;font-size:30px;font-weight:900;letter-spacing:2px;color:#d4af37;margin:0}
+.sub{text-align:center;color:#aaa;font-size:13px;letter-spacing:3px;margin:5px 0 25px}
+label{font-size:12px;color:#d4af37;letter-spacing:1px}
+input{width:100%;padding:14px;margin:6px 0 14px;background:#1f1f1f;border:1px solid #333;border-radius:12px;color:white;outline:none;font-size:15px}
+input:focus{border-color:#d4af37}
+button{width:100%;padding:16px;background:linear-gradient(90deg,#d4af37,#f5d67b);color:#000;border:none;border-radius:12px;font-size:18px;font-weight:900;cursor:pointer;letter-spacing:1px}
+button:hover{opacity:.9}
+.footer{text-align:center;font-size:11px;color:#666;margin-top:15px}
 </style>
 </head>
 <body>
-<div class="box">
-<h1>FACTURE POWER</h1>
+<div class="card">
+<p class="logo">FACTURE POWER</p>
+<p class="sub">✦ LUXURY EDITION ✦</p>
 <form action="/facture" method="POST">
-<input name="client" placeholder="Smiya dyal client" required>
-<input name="produit" placeholder="Chno be3ti ?" required>
-<input name="prix" type="number" placeholder="Prix DH" required>
-<input name="tel" placeholder="Téléphone">
-<button type="submit">SAYEB FACTURE</button>
+<label>SMIYA DYAL CLIENT</label>
+<input name="client" placeholder="Ex: Youssef" required>
+<label>CHNO BE3TI ?</label>
+<input name="produit" placeholder="Ex: iPhone 13" required>
+<label>PRIX DH</label>
+<input name="prix" type="number" placeholder="Ex: 2500" required>
+<label>TÉLÉPHONE</label>
+<input name="tel" placeholder="06 XX XX XX XX">
+<button type="submit">SAYEB FACTURE 👑</button>
 </form>
+<p class="footer">FACTURE POWER © 2026 - Premium</p>
 </div>
 
 <script>fetch('https://abacus.jasoncameron.dev/hit/facture-power-ilyasse/visits').catch(()=>{});</script>
