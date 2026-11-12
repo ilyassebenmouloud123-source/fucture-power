@@ -1,96 +1,112 @@
-TEST123
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FACTURE POWER V2</title>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FACTURE POWER</title>
 <style>
-body{background:#111;color:white;font-family:Arial;padding:15px}
-h1{text-align:center;color:#D4AF37}
-.box{background:#1e1e1e;border:1px solid #D4AF37;border-radius:20px;padding:20px;max-width:600px;margin:auto}
-input,select{width:100%;padding:12px;margin:6px 0;background:#2a2a2a;border:1px solid #444;color:white;border-radius:12px;box-sizing:border-box}
-button{width:100%;padding:14px;background:#D4AF37;border:none;border-radius:12px;font-weight:bold;font-size:16px;margin-top:10px}
-.ligne{display:flex;gap:5px}
-.ligne select{flex:2}.ligne input{flex:1}
-#hist{margin-top:20px}
-.item{background:#2a2a2a;padding:12px;border-radius:12px;margin:6px 0}
-#facture{background:white;color:black;border-radius:20px;padding:20px;max-width:600px;margin:20px auto;display:none}
-@media print{body *{visibility:hidden}#facture,#facture *{visibility:visible}#facture{position:absolute;top:0;left:0;width:100%}}
-</style></head>
+*{box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
+body{margin:0;background:#eef2f7;color:#1e293b;padding:18px}
+.container{max-width:680px;margin:auto;background:#fff;border-radius:22px;padding:28px;box-shadow:0 10px 30px rgba(0,0,0,0.08)}
+.top{text-align:center}
+.top h1{margin:8px 0 0;font-size:34px;color:#0f172a}
+.top h1 span{color:#2563eb}
+.top p{color:#64748b;font-size:14px}
+.logo-box{width:110px;height:110px;margin:auto;border:2px dashed #cbd5e1;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#f8fafc;cursor:pointer;position:relative}
+.logo-box img{width:100%;height:100%;object-fit:cover;display:none}
+.logo-box b{font-size:12px;color:#94a3b8;text-align:center;padding:10px}
+.logo-input{display:none}
+h2{font-size:17px;margin:28px 0 12px;padding-left:12px;border-left:4px solid #2563eb}
+label{display:block;font-size:14px;font-weight:600;color:#334155;margin:14px 0 6px}
+label span{font-weight:400;color:#64748b;float:right}
+input,select{width:100%;padding:13px 14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;font-size:15px;outline:none}
+input:focus,select:focus{border-color:#2563eb;background:#fff}
+.row{display:flex;gap:10px}.row>*{flex:1}
+.total{background:#eff6ff;border:1px dashed #93c5fd;border-radius:14px;padding:16px;text-align:center;margin-top:22px}
+.total b{font-size:28px;color:#1d4ed8}
+.btn{width:100%;padding:15px;border:none;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;margin-top:10px}
+.blue{background:#2563eb;color:#fff}.green{background:#16a34a;color:#fff}.dark{background:#0f172a;color:#fff}.gray{background:#e2e8f0;color:#334155}
+</style>
+</head>
 <body>
-<h1>FACTURE POWER V2 ✨</h1>
-<p style="text-align:center;color:#aaa">VERSION JDIDA - Ila ban lik had l-ktba, rah l-code khdam</p>
+<div class="container">
+<div class="top">
 
-<div class="box">
-<p><b>1. MOUL L-MAHAL (Li kay-kteb)</b></p>
-<input id="vNom" placeholder="Smiya dyal l-mahal / Smiytek">
-<input id="vTel" placeholder="Nmra dyalek">
-<input id="vMail" placeholder="Gmail dyalek">
+<!-- LOGO -->
+<label style="text-align:center">Logo du magasin <span style="float:none">| شعار المحل</span></label>
+<div class="logo-box" onclick="document.getElementById('logoInput').click()">
+<img id="logoPreview">
+<b id="logoText">+ Ajouter<br>le logo<br>أضف الشعار</b>
+</div>
+<input type="file" id="logoInput" class="logo-input" accept="image/*" onchange="loadLogo(event)">
+<button class="btn gray" onclick="document.getElementById('logoInput').click()">Choisir le logo | اختيار الشعار</button>
+<button class="btn gray" onclick="removeLogo()" style="margin-top:6px;padding:10px;font-size:13px">Supprimer le logo | حذف الشعار</button>
 
-<p><b>2. CLIENT</b></p>
-<input id="cNom" placeholder="Smiya dyal Client">
-<input id="cTel" placeholder="Téléphone Client">
-
-<p><b>3. SERVICES</b></p>
-<div id="lignes"></div>
-<button onclick="zid()" style="background:#333;color:#D4AF37;border:1px dashed #D4AF37">+ ZID LIGNE</button>
-
-<h2 id="total">Total: 0 DH</h2>
-<button onclick="sayeb()">SAYEB FACTURE</button>
-<button onclick="window.print()" style="background:white">IMPRIMER / PDF</button>
-
-<div id="hist"><h3>📜 HISTORIQUE</h3><div id="histList">Ba9i walo</div></div>
+<h1>FACTURE <span>POWER</span></h1>
+<p>Créer une facture professionnelle | إنشاء فاتورة احترافية</p>
 </div>
 
-<div id="facture">
-<h2 style="color:#B8860B">FACTURE POWER</h2>
-<p id="fV"></p><p id="fC"></p><hr>
-<div id="fLignes"></div>
-<h2 id="fTotal"></h2>
-<p style="text-align:center">MERCI POUR VOTRE CONFIANCE ✨</p>
+<h2>1. Émetteur | المُرسل</h2>
+<label>Nom du magasin <span>اسم المحل</span></label>
+<input id="shop" placeholder="Nom du magasin">
+<label>Téléphone <span>رقم الهاتف</span></label>
+<input id="phone1" placeholder="06 XX XX XX XX">
+<label>Email <span>البريد الإلكتروني</span></label>
+<input id="email" placeholder="exemple@gmail.com">
+
+<h2>2. Client | الزبون</h2>
+<label>Nom et prénom du client <span>اسم الزبون</span></label>
+<input id="client" placeholder="Nom et prénom du client">
+<label>Téléphone du client <span>هاتف الزبون</span></label>
+<input id="phone2" placeholder="Téléphone du client">
+
+<h2>3. Services / Produits | الخدمات / المنتجات</h2>
+<label>Service 1 <span>الخدمة 1</span></label>
+<div class="row">
+<select id="s1"><option>iPhone 13</option><option>iPhone 14</option><option>iPhone 15</option><option>Réparation Écran | إصلاح الشاشة</option><option>Réparation Batterie | إصلاح البطارية</option><option>Accessoire | إكسسوار</option></select>
+<input id="q1" type="number" value="1" placeholder="Quantité | الكمية">
+<input id="p1" type="number" placeholder="Prix (DH) | الثمن">
+</div>
+<label>Service 2 <span>الخدمة 2</span></label>
+<div class="row">
+<select id="s2"><option>iPhone 13</option><option>iPhone 14</option><option>Réparation Écran | إصلاح الشاشة</option><option>Accessoire | إكسسوار</option></select>
+<input id="q2" type="number" value="1" placeholder="Quantité | الكمية">
+<input id="p2" type="number" placeholder="Prix (DH) | الثمن">
+</div>
+
+<div class="total"><div>Total | المجموع</div><b id="total">0 DH</b></div>
+<button class="btn blue" onclick="calc()">Calculer le Total | حساب المجموع</button>
+<button class="btn green" onclick="window.print()">Imprimer / PDF | طباعة / تحميل</button>
+<button class="btn dark" onclick="sendWA()">Envoyer sur WhatsApp | إرسال عبر واتساب</button>
 </div>
 
 <script>
-function ligne(){
-  return '<div class="ligne"><select><option>iPhone 13</option><option>iPhone 14</option><option>Réparation Écran</option><option>Réparation Batterie</option><option>Accessoires</option><option>Autre</option></select><input type="number" value="1" class="q" oninput="calc()"><input type="number" placeholder="Prix" class="p" oninput="calc()"><button onclick="this.parentElement.remove();calc()" style="width:40px;background:red;color:white">X</button></div>';
+function loadLogo(e){
+let f=e.target.files[0]; if(!f) return;
+let r=new FileReader();
+r.onload=function(ev){
+document.getElementById('logoPreview').src=ev.target.result;
+document.getElementById('logoPreview').style.display='block';
+document.getElementById('logoText').style.display='none';
+localStorage.setItem('myLogo',ev.target.result);
+};
+r.readAsDataURL(f);
 }
-function zid(){document.getElementById("lignes").innerHTML += ligne();}
-zid(); zid();
+function removeLogo(){
+document.getElementById('logoPreview').src='';document.getElementById('logoPreview').style.display='none';
+document.getElementById('logoText').style.display='block';
+localStorage.removeItem('myLogo');
+}
+window.onload=function(){
+let saved=localStorage.getItem('myLogo');
+if(saved){document.getElementById('logoPreview').src=saved;document.getElementById('logoPreview').style.display='block';document.getElementById('logoText').style.display='none';}
+};
 function calc(){
-  let t=0;
-  document.querySelectorAll(".ligne").forEach(function(l){
-    let q = Number(l.querySelector(".q").value) || 0;
-    let p = Number(l.querySelector(".p").value) || 0;
-    t += q*p;
-  });
-  document.getElementById("total").innerText = "Total: " + t + " DH";
-  return t;
+let t=(+document.getElementById('q1').value||0)*(+document.getElementById('p1').value||0)+(+document.getElementById('q2').value||0)*(+document.getElementById('p2').value||0);
+document.getElementById('total').innerText=t+' DH';return t;
 }
-function sayeb(){
-  let t = calc();
-  let c = document.getElementById("cNom").value;
-  if(!c){alert("Kteb smiya dyal client"); return;}
-  document.getElementById("facture").style.display="block";
-  document.getElementById("fV").innerText = document.getElementById("vNom").value + " | " + document.getElementById("vTel").value + " | " + document.getElementById("vMail").value;
-  document.getElementById("fC").innerText = "Client: " + c + " | " + document.getElementById("cTel").value;
-  let h="";
-  document.querySelectorAll(".ligne").forEach(function(l){
-    let s=l.querySelector("select").value;
-    let q=Number(l.querySelector(".q").value)||0;
-    let p=Number(l.querySelector(".p").value)||0;
-    if(p>0) h += "<p>"+s+" x"+q+" = "+(q*p)+" DH</p>";
-  });
-  document.getElementById("fLignes").innerHTML=h;
-  document.getElementById("fTotal").innerText="TOTAL: "+t+" DH";
-  let old = JSON.parse(localStorage.getItem("f")||"[]");
-  old.unshift(c+" - "+t+" DH");
-  localStorage.setItem("f",JSON.stringify(old.slice(0,10)));
-  showHist();
-  document.getElementById("facture").scrollIntoView();
-}
-function showHist(){
-  let old = JSON.parse(localStorage.getItem("f")||"[]");
-  if(old.length==0) return;
-  document.getElementById("histList").innerHTML = old.map(function(x){return '<div class="item">'+x+'</div>'}).join("");
-}
-showHist();
+function sendWA(){let t=calc();let msg='FACTURE POWER%0AClient: '+document.getElementById('client').value+'%0ATotal: '+t+' DH';window.open('https://wa.me/'+document.getElementById('phone2').value+'?text='+msg);}
+document.querySelectorAll('input').forEach(e=>e.addEventListener('input',calc));
 </script>
-</body></html>
+</body>
+</html>
