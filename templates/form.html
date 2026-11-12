@@ -3,47 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FACTURE POWER</title>
+<title>FACTURE POWER - LUXURY</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
-body{margin:0;background:#eef2f7;color:#1e293b;padding:18px}
-.container{max-width:680px;margin:auto;background:#fff;border-radius:22px;padding:28px;box-shadow:0 10px 30px rgba(0,0,0,0.08)}
-.top{text-align:center}
-.top h1{margin:8px 0 0;font-size:34px;color:#0f172a}
-.top h1 span{color:#2563eb}
-.top p{color:#64748b;font-size:14px}
-.logo-box{width:110px;height:110px;margin:auto;border:2px dashed #cbd5e1;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#f8fafc;cursor:pointer;position:relative}
+*{box-sizing:border-box;font-family:'Inter',Arial,sans-serif}
+body{margin:0;background:#fdf8ec;color:#1a1a1a;padding:18px}
+.container{max-width:700px;margin:auto;background:#fffdf7;border:1px solid #e8d5a3;border-radius:28px;padding:32px;box-shadow:0 20px 50px rgba(212,175,55,0.18);position:relative;overflow:hidden}
+.container:before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#b8860b,#f5c518,#fff2a8,#d4af37,#b8860b)}
+.top{text-align:center;padding-top:10px}
+.top h1{font-family:'Playfair Display',serif;font-size:38px;letter-spacing:3px;margin:10px 0 0;color:#111}
+.top h1 span{color:#c9a227;background:linear-gradient(180deg,#f5c518,#a67c00);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.top p{color:#8a7a3a;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-top:6px}
+.gold-line{width:70px;height:3px;background:linear-gradient(90deg,#d4af37,#f5c518);margin:14px auto;border-radius:10px}
+.logo-box{width:120px;height:120px;margin:8px auto;border:2px solid #e8d5a3;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fffdf7;cursor:pointer;box-shadow:0 8px 20px rgba(212,175,55,0.25)}
 .logo-box img{width:100%;height:100%;object-fit:cover;display:none}
-.logo-box b{font-size:12px;color:#94a3b8;text-align:center;padding:10px}
+.logo-box b{font-size:12px;color:#a08c2e;text-align:center}
 .logo-input{display:none}
-h2{font-size:17px;margin:28px 0 12px;padding-left:12px;border-left:4px solid #2563eb}
-label{display:block;font-size:14px;font-weight:600;color:#334155;margin:14px 0 6px}
-label span{font-weight:400;color:#64748b;float:right}
-input,select{width:100%;padding:13px 14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;font-size:15px;outline:none}
-input:focus,select:focus{border-color:#2563eb;background:#fff}
+h2{font-family:'Playfair Display',serif;font-size:19px;margin:30px 0 12px;padding-left:14px;border-left:3px solid #d4af37;color:#111}
+label{display:block;font-size:13px;font-weight:700;color:#3a3310;margin:14px 0 6px;letter-spacing:.3px}
+label span{font-weight:400;color:#8a7a3a;float:right}
+input{width:100%;padding:14px 15px;border:1.5px solid #f0e2b0;border-radius:14px;background:#fffdf5;font-size:15px;outline:none;color:#111}
+input:focus{border-color:#d4af37;box-shadow:0 0 0 4px #fff3b0;background:#fff}
 .row{display:flex;gap:10px}.row>*{flex:1}
-.total{background:#eff6ff;border:1px dashed #93c5fd;border-radius:14px;padding:16px;text-align:center;margin-top:22px}
-.total b{font-size:28px;color:#1d4ed8}
-.btn{width:100%;padding:15px;border:none;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;margin-top:10px}
-.blue{background:#2563eb;color:#fff}.green{background:#16a34a;color:#fff}.dark{background:#0f172a;color:#fff}.gray{background:#e2e8f0;color:#334155}
+.total{background:linear-gradient(135deg,#fff8d6,#fffdf7);border:1.5px solid #e8d5a3;border-radius:18px;padding:18px;text-align:center;margin-top:24px}
+.total div{font-size:12px;letter-spacing:2px;color:#8a7a3a;text-transform:uppercase}
+.total b{font-family:'Playfair Display',serif;font-size:32px;color:#111}
+.btn{width:100%;padding:15px;border:none;border-radius:16px;font-size:15px;font-weight:700;cursor:pointer;margin-top:10px;letter-spacing:.3px}
+.blue{background:linear-gradient(135deg,#111,#2b2b2b);color:#f5c518}
+.green{background:linear-gradient(135deg,#d4af37,#f5c518);color:#111}
+.dark{background:#111;color:#fff}
+.gray{background:#fdf6d8;color:#5a4d00;border:1px solid #e8d5a3}
+.small{font-size:12px;color:#8a7a3a;margin-top:4px}
+.footer{text-align:center;font-size:11px;color:#a08c2e;margin-top:20px;letter-spacing:1px}
 </style>
 </head>
 <body>
 <div class="container">
 <div class="top">
-
-<!-- LOGO -->
 <label style="text-align:center">Logo du magasin <span style="float:none">| شعار المحل</span></label>
 <div class="logo-box" onclick="document.getElementById('logoInput').click()">
-<img id="logoPreview">
-<b id="logoText">+ Ajouter<br>le logo<br>أضف الشعار</b>
+<img id="logoPreview"><b id="logoText">✦ Ajouter<br>le logo<br>أضف الشعار</b>
 </div>
 <input type="file" id="logoInput" class="logo-input" accept="image/*" onchange="loadLogo(event)">
 <button class="btn gray" onclick="document.getElementById('logoInput').click()">Choisir le logo | اختيار الشعار</button>
-<button class="btn gray" onclick="removeLogo()" style="margin-top:6px;padding:10px;font-size:13px">Supprimer le logo | حذف الشعار</button>
-
 <h1>FACTURE <span>POWER</span></h1>
-<p>Créer une facture professionnelle | إنشاء فاتورة احترافية</p>
+<div class="gold-line"></div>
+<p>Élégance • Qualité • Confiance | أناقة • جودة • ثقة</p>
 </div>
 
 <h2>1. Émetteur | المُرسل</h2>
@@ -61,51 +66,48 @@ input:focus,select:focus{border-color:#2563eb;background:#fff}
 <input id="phone2" placeholder="Téléphone du client">
 
 <h2>3. Services / Produits | الخدمات / المنتجات</h2>
+<p class="small">✦ Tu peux écrire ce que tu veux. | ✦ يمكنك كتابة ما تريد.</p>
+
+<datalist id="suggestions">
+<option value="iPhone 13"></option>
+<option value="iPhone 14"></option>
+<option value="iPhone 15"></option>
+<option value="Réparation Écran | إصلاح الشاشة"></option>
+<option value="Réparation Batterie | إصلاح البطارية"></option>
+<option value="Accessoire | إكسسوار"></option>
+</datalist>
+
 <label>Service 1 <span>الخدمة 1</span></label>
 <div class="row">
-<select id="s1"><option>iPhone 13</option><option>iPhone 14</option><option>iPhone 15</option><option>Réparation Écran | إصلاح الشاشة</option><option>Réparation Batterie | إصلاح البطارية</option><option>Accessoire | إكسسوار</option></select>
-<input id="q1" type="number" value="1" placeholder="Quantité | الكمية">
+<input id="s1" list="suggestions" placeholder="Écris ici... / اكتب هنا...">
+<input id="q1" type="number" value="1" placeholder="Qté | الكمية">
 <input id="p1" type="number" placeholder="Prix (DH) | الثمن">
 </div>
 <label>Service 2 <span>الخدمة 2</span></label>
 <div class="row">
-<select id="s2"><option>iPhone 13</option><option>iPhone 14</option><option>Réparation Écran | إصلاح الشاشة</option><option>Accessoire | إكسسوار</option></select>
-<input id="q2" type="number" value="1" placeholder="Quantité | الكمية">
+<input id="s2" list="suggestions" placeholder="Écris ici... / اكتب هنا...">
+<input id="q2" type="number" value="1" placeholder="Qté | الكمية">
 <input id="p2" type="number" placeholder="Prix (DH) | الثمن">
+</div>
+<label>Service 3 <span>الخدمة 3</span></label>
+<div class="row">
+<input id="s3" list="suggestions" placeholder="Écris ici... / اكتب هنا...">
+<input id="q3" type="number" value="1" placeholder="Qté | الكمية">
+<input id="p3" type="number" placeholder="Prix (DH) | الثمن">
 </div>
 
 <div class="total"><div>Total | المجموع</div><b id="total">0 DH</b></div>
-<button class="btn blue" onclick="calc()">Calculer le Total | حساب المجموع</button>
+<button class="btn blue" onclick="calc()">✦ Calculer le Total | حساب المجموع</button>
 <button class="btn green" onclick="window.print()">Imprimer / PDF | طباعة / تحميل</button>
 <button class="btn dark" onclick="sendWA()">Envoyer sur WhatsApp | إرسال عبر واتساب</button>
+<div class="footer">FACTURE POWER • LUXURY EDITION</div>
 </div>
 
 <script>
-function loadLogo(e){
-let f=e.target.files[0]; if(!f) return;
-let r=new FileReader();
-r.onload=function(ev){
-document.getElementById('logoPreview').src=ev.target.result;
-document.getElementById('logoPreview').style.display='block';
-document.getElementById('logoText').style.display='none';
-localStorage.setItem('myLogo',ev.target.result);
-};
-r.readAsDataURL(f);
-}
-function removeLogo(){
-document.getElementById('logoPreview').src='';document.getElementById('logoPreview').style.display='none';
-document.getElementById('logoText').style.display='block';
-localStorage.removeItem('myLogo');
-}
-window.onload=function(){
-let saved=localStorage.getItem('myLogo');
-if(saved){document.getElementById('logoPreview').src=saved;document.getElementById('logoPreview').style.display='block';document.getElementById('logoText').style.display='none';}
-};
-function calc(){
-let t=(+document.getElementById('q1').value||0)*(+document.getElementById('p1').value||0)+(+document.getElementById('q2').value||0)*(+document.getElementById('p2').value||0);
-document.getElementById('total').innerText=t+' DH';return t;
-}
-function sendWA(){let t=calc();let msg='FACTURE POWER%0AClient: '+document.getElementById('client').value+'%0ATotal: '+t+' DH';window.open('https://wa.me/'+document.getElementById('phone2').value+'?text='+msg);}
+function loadLogo(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=function(ev){document.getElementById('logoPreview').src=ev.target.result;document.getElementById('logoPreview').style.display='block';document.getElementById('logoText').style.display='none';localStorage.setItem('myLogo',ev.target.result);};r.readAsDataURL(f);}
+window.onload=function(){let s=localStorage.getItem('myLogo');if(s){document.getElementById('logoPreview').src=s;document.getElementById('logoPreview').style.display='block';document.getElementById('logoText').style.display='none';}};
+function calc(){let t=(+document.getElementById('q1').value||0)*(+document.getElementById('p1').value||0)+(+document.getElementById('q2').value||0)*(+document.getElementById('p2').value||0)+(+document.getElementById('q3').value||0)*(+document.getElementById('p3').value||0);document.getElementById('total').innerText=t+' DH';return t;}
+function sendWA(){let t=calc();let msg='FACTURE POWER - LUXURY%0AClient: '+document.getElementById('client').value+'%0ATotal: '+t+' DH';window.open('https://wa.me/'+document.getElementById('phone2').value+'?text='+msg);}
 document.querySelectorAll('input').forEach(e=>e.addEventListener('input',calc));
 </script>
 </body>
