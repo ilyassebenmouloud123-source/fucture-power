@@ -25,6 +25,8 @@ label span{font-weight:400;color:#8a7a3a;float:right}
 input{width:100%;padding:14px 15px;border:1.5px solid #f0e2b0;border-radius:14px;background:#fffdf5;font-size:15px;outline:none;color:#111}
 input:focus{border-color:#d4af37;box-shadow:0 0 0 4px #fff3b0;background:#fff}
 .row{display:flex;gap:10px}.row>*{flex:1}
+/* LIGNE DE SEPARATION ENTRE LES SERVICES */
+.service-line{border-bottom:1px solid #f0e2b0;padding-bottom:14px;margin-bottom:6px}
 .total{background:linear-gradient(135deg,#fff8d6,#fffdf7);border:1.5px solid #e8d5a3;border-radius:18px;padding:18px;text-align:center;margin-top:24px}
 .total div{font-size:12px;letter-spacing:2px;color:#8a7a3a;text-transform:uppercase}
 .total b{font-family:'Playfair Display',serif;font-size:32px;color:#111}
@@ -33,6 +35,7 @@ input:focus{border-color:#d4af37;box-shadow:0 0 0 4px #fff3b0;background:#fff}
 .green{background:linear-gradient(135deg,#d4af37,#f5c518);color:#111}
 .dark{background:#111;color:#fff}
 .gray{background:#fdf6d8;color:#5a4d00;border:1px solid #e8d5a3}
+.add-line{background:#fff;border:1.5px dashed #d4af37;color:#8a7a3a}
 .small{font-size:12px;color:#8a7a3a;margin-top:4px}
 .footer{text-align:center;font-size:11px;color:#a08c2e;margin-top:20px;letter-spacing:1px}
 </style>
@@ -77,24 +80,16 @@ input:focus{border-color:#d4af37;box-shadow:0 0 0 4px #fff3b0;background:#fff}
 <option value="Accessoire | إكسسوار"></option>
 </datalist>
 
-<label>Service 1 <span>الخدمة 1</span></label>
-<div class="row">
-<input id="s1" list="suggestions" placeholder="Écris ici... / اكتب هنا...">
-<input id="q1" type="number" value="1" placeholder="Qté | الكمية">
-<input id="p1" type="number" placeholder="Prix (DH) | الثمن">
+<!-- LES LIGNES -->
+<div id="lines">
+<div class="service-line"><label>Service 1 <span>الخدمة 1</span></label><div class="row"><input class="s-name" list="suggestions" placeholder="Écris ici... / اكتب هنا..."><input class="s-qty" type="number" value="1" placeholder="Qté | الكمية"><input class="s-price" type="number" placeholder="Prix (DH) | الثمن"></div></div>
+<div class="service-line"><label>Service 2 <span>الخدمة 2</span></label><div class="row"><input class="s-name" list="suggestions" placeholder="Écris ici... / اكتب هنا..."><input class="s-qty" type="number" value="1" placeholder="Qté | الكمية"><input class="s-price" type="number" placeholder="Prix (DH) | الثمن"></div></div>
+<div class="service-line"><label>Service 3 <span>الخدمة 3</span></label><div class="row"><input class="s-name" list="suggestions" placeholder="Écris ici... / اكتب هنا..."><input class="s-qty" type="number" value="1" placeholder="Qté | الكمية"><input class="s-price" type="number" placeholder="Prix (DH) | الثمن"></div></div>
+<div class="service-line"><label>Service 4 <span>الخدمة 4</span></label><div class="row"><input class="s-name" list="suggestions" placeholder="Écris ici... / اكتب هنا..."><input class="s-qty" type="number" value="1" placeholder="Qté | الكمية"><input class="s-price" type="number" placeholder="Prix (DH) | الثمن"></div></div>
+<div class="service-line"><label>Service 5 <span>الخدمة 5</span></label><div class="row"><input class="s-name" list="suggestions" placeholder="Écris ici... / اكتب هنا..."><input class="s-qty" type="number" value="1" placeholder="Qté | الكمية"><input class="s-price" type="number" placeholder="Prix (DH) | الثمن"></div></div>
 </div>
-<label>Service 2 <span>الخدمة 2</span></label>
-<div class="row">
-<input id="s2" list="suggestions" placeholder="Écris ici... / اكتب هنا...">
-<input id="q2" type="number" value="1" placeholder="Qté | الكمية">
-<input id="p2" type="number" placeholder="Prix (DH) | الثمن">
-</div>
-<label>Service 3 <span>الخدمة 3</span></label>
-<div class="row">
-<input id="s3" list="suggestions" placeholder="Écris ici... / اكتب هنا...">
-<input id="q3" type="number" value="1" placeholder="Qté | الكمية">
-<input id="p3" type="number" placeholder="Prix (DH) | الثمن">
-</div>
+
+<button class="btn add-line" onclick="addLine()">+ Ajouter une ligne | إضافة سطر</button>
 
 <div class="total"><div>Total | المجموع</div><b id="total">0 DH</b></div>
 <button class="btn blue" onclick="calc()">✦ Calculer le Total | حساب المجموع</button>
@@ -104,9 +99,11 @@ input:focus{border-color:#d4af37;box-shadow:0 0 0 4px #fff3b0;background:#fff}
 </div>
 
 <script>
+let count=5;
+function addLine(){count++;let d=document.createElement('div');d.className='service-line';d.innerHTML='<label>Service '+count+' <span>الخدمة '+count+'</span></label><div class="row"><input class="s-name" list="suggestions" placeholder="Écris ici... / اكتب هنا..."><input class="s-qty" type="number" value="1" placeholder="Qté | الكمية"><input class="s-price" type="number" placeholder="Prix (DH) | الثمن"></div>';document.getElementById('lines').appendChild(d);d.querySelectorAll('input').forEach(e=>e.addEventListener('input',calc));}
 function loadLogo(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=function(ev){document.getElementById('logoPreview').src=ev.target.result;document.getElementById('logoPreview').style.display='block';document.getElementById('logoText').style.display='none';localStorage.setItem('myLogo',ev.target.result);};r.readAsDataURL(f);}
 window.onload=function(){let s=localStorage.getItem('myLogo');if(s){document.getElementById('logoPreview').src=s;document.getElementById('logoPreview').style.display='block';document.getElementById('logoText').style.display='none';}};
-function calc(){let t=(+document.getElementById('q1').value||0)*(+document.getElementById('p1').value||0)+(+document.getElementById('q2').value||0)*(+document.getElementById('p2').value||0)+(+document.getElementById('q3').value||0)*(+document.getElementById('p3').value||0);document.getElementById('total').innerText=t+' DH';return t;}
+function calc(){let t=0;document.querySelectorAll('.service-line').forEach(row=>{let q=+row.querySelector('.s-qty').value||0;let p=+row.querySelector('.s-price').value||0;t+=q*p;});document.getElementById('total').innerText=t+' DH';return t;}
 function sendWA(){let t=calc();let msg='FACTURE POWER - LUXURY%0AClient: '+document.getElementById('client').value+'%0ATotal: '+t+' DH';window.open('https://wa.me/'+document.getElementById('phone2').value+'?text='+msg);}
 document.querySelectorAll('input').forEach(e=>e.addEventListener('input',calc));
 </script>
