@@ -1,52 +1,90 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FACTURE POWER - Luxury Edition</title>
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FACTURE POWER - PRO</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-<style>body{font-family:'Inter',sans-serif;background:#f6f5f1}h1,h2{font-family:'Space Grotesk',sans-serif}</style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<style>body{font-family:'Manrope',sans-serif}.serif{font-family:'Cormorant Garamond',serif}.gold{color:#D4AF37}.bg-gold{background:linear-gradient(135deg,#D4AF37,#B8860B)}input,select{outline:none}input:focus,select:focus{border-color:#D4AF37!important}@media print{.no-print{display:none}body{background:white}}</style>
 </head>
-<body>
-<header class="bg-black text-white mx-4 mt-4 rounded-[22px] flex justify-between items-center px-5 py-4">
-<div class="flex items-center gap-3"><div class="bg-[#1e1e1e] w-10 h-10 rounded-xl flex items-center justify-center text-[#ffcc00] font-bold">FP</div><div><p class="font-bold text-[11px] tracking-widest">FACTURE POWER</p><p class="text-[#ffcc00] text-[9px] tracking-[0.35em]">LUXURY EDITION</p></div></div>
-<a href="/form" class="bg-white text-black text-[11px] font-bold px-5 py-2.5 rounded-full">CRÉER UNE FACTURE →</a>
-</header>
+<body class="bg-[#0a0a0a] min-h-screen text-white p-4 md:p-8">
 
-<section class="max-w-6xl mx-auto text-center pt-24 px-6">
-<div class="inline-flex bg-white border rounded-full px-4 py-1 text-[10px]">MADE FOR ARTISANS MAROCAINS</div>
-<h1 class="text-5xl md:text-[84px] font-bold leading-[0.85] mt-6">Créez une<br>facture <span class="bg-black text-[#ffcc00] px-4 rounded-xl rotate-[-2deg] inline-block">PRO</span><br>en 30 secondes.</h1>
-<p class="text-zinc-500 mt-6 max-w-2xl mx-auto">Le générateur avec ICE, RC, IF, Logo, TVA, remise et envoi WhatsApp direct. Design LUXURY qui impressionne.</p>
-<div class="flex flex-col md:flex-row gap-3 justify-center mt-10">
-<a href="/form" class="bg-black text-white px-10 py-4 rounded-2xl font-bold">+ Nouvelle facture gratuite</a>
+<!-- HEADER -->
+<div class="max-w-5xl mx-auto text-center mb-8">
+  <p class="serif text-4xl md:text-5xl font-bold tracking-wide">FACTURE <span class="gold">POWER</span></p>
+  <p class="text-[11px] tracking-[0.4em] text-zinc-400 mt-2">✦ LUXURY EDITION • PRO ✦</p>
 </div>
-<p class="text-[11px] text-zinc-400 mt-3">✓ Sans inscription ✓ PDF instantané ✓ 100% gratuit</p>
-</section>
 
-<section class="max-w-6xl mx-auto mt-20 px-6 grid md:grid-cols-3 gap-4">
-<div class="bg-white rounded-[20px] p-6"><p class="text-2xl">⚡</p><h3 class="font-bold mt-3">Ultra Rapide</h3><p class="text-sm text-zinc-500 mt-1">3 champs et c'est prêt. Historique à droite sauvegardé.</p></div>
-<div class="bg-white rounded-[20px] p-6"><p class="text-2xl">🎨</p><h3 class="font-bold mt-3">Design LUXURY</h3><p class="text-sm text-zinc-500 mt-1">Noir & Or, pro et clean. Votre client voit le sérieux.</p></div>
-<div class="bg-black rounded-[20px] p-6 text-white"><p class="text-2xl">📲</p><h3 class="font-bold mt-3 text-[#ffcc00]">Envoi WhatsApp</h3><p class="text-sm text-zinc-400 mt-1">Un clic et la facture part chez le client.</p></div>
-</section>
+<div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
+<!-- FORM -->
+<div class="md:col-span-2 bg-[#141414] border border-[#2a2410] rounded-[28px] p-6 md:p-8">
+  <p class="font-black tracking-widest text-sm mb-5">✍️ SMIYA DYAL LI KAY-KTEB <span class="gold">(NTA)</span></p>
+  <div class="grid grid-cols-2 gap-3">
+    <input id="vendeurNom" placeholder="Smiytek - Ex: Youssef" class="bg-zinc-900 border border-zinc-800 rounded-2xl px-4 py-3.5 text-sm col-span-2">
+    <input id="vendeurTel" placeholder="Nmra dyalek - 06 XX XX XX XX" class="bg-zinc-900 border border-zinc-800 rounded-2xl px-4 py-3.5 text-sm">
+    <input id="vendeurMail" placeholder="Gmail dyalek - Ex: youssef@gmail.com" class="bg-zinc-900 border border-zinc-800 rounded-2xl px-4 py-3.5 text-sm">
+  </div>
 
-<section class="max-w-6xl mx-auto mt-24 px-6">
-<h2 class="text-4xl font-bold">Comment ça marche ?</h2>
-<div class="grid md:grid-cols-3 gap-8 mt-10">
-<div><div class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-bold">1</div><h3 class="font-bold mt-4">Infos Pro</h3><p class="text-sm text-zinc-500 mt-2">Nom, ICE, RC/IF, Tel. Une seule fois.</p></div>
-<div><div class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-bold">2</div><h3 class="font-bold mt-4">Client + Prestations</h3><p class="text-sm text-zinc-500 mt-2">Ajoutez client, articles, TVA et remise.</p></div>
-<div><div class="w-10 h-10 rounded-full bg-[#ffcc00] text-black flex items-center justify-center font-bold">3</div><h3 class="font-bold mt-4">PDF + WhatsApp</h3><p class="text-sm text-zinc-500 mt-2">Générez et envoyez direct.</p></div>
+  <p class="font-black tracking-widest text-sm mt-7 mb-5">👤 CLIENT</p>
+  <div class="grid grid-cols-2 gap-3">
+    <input id="client" placeholder="Smiya dyal Client - Ex: Omar" class="bg-zinc-900 border border-zinc-800 rounded-2xl px-4 py-3.5 text-sm col-span-2">
+    <input id="clientTel" placeholder="Téléphone Client" class="bg-zinc-900 border border-zinc-800 rounded-2xl px-4 py-3.5 text-sm col-span-2">
+  </div>
+
+  <p class="font-black tracking-widest text-sm mt-7 mb-3">🛍️ LES SERVICES / PRODUITS</p>
+  <div id="lignes"></div>
+  <button onclick="zidLigne()" class="w-full mt-3 border border-dashed border-[#D4AF37] text-[#D4AF37] rounded-2xl py-3 font-bold text-sm">+ ZID LIGNE JADIDA</button>
+
+  <div class="flex gap-3 mt-6">
+    <button onclick="sayeb()" class="flex-1 bg-gold text-black font-black rounded-2xl py-4 tracking-widest">SAYEB FACTURE ✨</button>
+    <button onclick="window.print()" class="px-6 bg-white text-black font-bold rounded-2xl">PDF / PRINT</button>
+  </div>
+  <p id="totalTxt" class="text-right serif text-3xl gold font-bold mt-5">Total: 0 DH</p>
 </div>
-</section>
 
-<section class="max-w-6xl mx-auto mt-24 px-6 bg-white rounded-[28px] p-10 border">
-<h2 class="text-3xl font-bold">Tout ce qu'il vous faut</h2>
-<div class="grid md:grid-cols-2 gap-4 mt-8 text-sm">
-<p>✓ Logo entreprise</p><p>✓ ICE / RC / IF / ICE</p><p>✓ Calcul TVA auto</p><p>✓ Remise % ou DH</p><p>✓ Numérotation auto FACT-2025</p><p>✓ Historique jamais perdu</p><p>✓ Email pro</p><p>✓ 100% Mobile</p>
+<!-- HISTORIQUE -->
+<div class="bg-[#141414] border border-[#2a2410] rounded-[28px] p-6">
+  <p class="font-black tracking-widest text-sm">📜 HISTORIQUE</p>
+  <p class="text-xs text-zinc-500 mt-1">Ga3 les factures li sayebti</p>
+  <div id="hist" class="mt-5 space-y-3"></div>
+  <button onclick="localStorage.removeItem('factures');afficherHist()" class="text-xs text-red-400 mt-5 underline">Mseh l-historique</button>
 </div>
-<div class="mt-10"><a href="/form" class="bg-black text-white px-8 py-4 rounded-xl font-bold inline-block">Commencer maintenant →</a></div>
-</section>
+</div>
 
-<footer class="text-center text-[10px] text-zinc-400 py-12">FACTURE POWER © 2026 - LUXURY EDITION</footer>
-</body>
-</html>
+<!-- FACTURE A IMPRIMER -->
+<div id="facture" class="max-w-4xl mx-auto bg-white text-black rounded-[32px] overflow-hidden mt-8 hidden">
+  <div class="p-8 md:p-10 flex justify-between">
+    <div><p class="font-black tracking-widest">FACTURE POWER</p><p class="text-xs gold tracking-widest">LUXURY EDITION</p><p id="fVendeur" class="mt-6 font-bold text-lg"></p><p id="fVendeurInfo" class="text-sm text-zinc-500"></p></div>
+    <div class="text-right"><p class="text-xs tracking-widest text-zinc-400">FACTURE N°</p><p id="fNum" class="serif text-3xl font-bold"></p><p id="fDate" class="text-sm mt-2"></p></div>
+  </div>
+  <div class="px-8 py-6 bg-[#fcfbf7] border-y flex justify-between"><div><p class="text-xs tracking-widest text-zinc-400">FACTURÉ À</p><p id="fClient" class="serif text-2xl font-bold"></p><p id="fClientTel" class="text-sm text-zinc-500"></p></div><div class="text-right"><p class="text-xs tracking-widest text-zinc-400">TOTAL</p><p id="fTotal" class="serif text-4xl font-bold gold"></p></div></div>
+  <div class="p-8"><table class="w-full text-sm"><thead><tr class="text-xs text-zinc-400 border-b"><th class="text-left py-3">SERVICE / PRODUIT</th><th class="text-center">QTÉ</th><th class="text-right">PRIX</th><th class="text-right">TOTAL</th></tr></thead><tbody id="fLignes"></tbody></table><p class="text-center text-xs text-zinc-400 mt-10 tracking-widest">MERCI POUR VOTRE CONFIANCE ✨</p><p id="fFooter" class="text-center text-xs text-zinc-400 mt-2"></p></div>
+</div>
+
+<script>
+let services=["iPhone 13","iPhone 14","Réparation Écran","Réparation Batterie","Accessoires","AirPods","Samsung","Autre..."];
+function ligneHTML(){
+  let opts=services.map(s=>`<option>${s}</option>`).join('');
+  return `<div class="ligne grid grid-cols-12 gap-2 mt-2"><select class="serv col-span-5 bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-3 text-sm"><option>Choisir Service...</option>${opts}</select><input class="qte col-span-2 bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-3 text-sm" type="number" value="1" oninput="calcul()"><input class="prix col-span-3 bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-3 text-sm" type="number" placeholder="Prix DH" oninput="calcul()"><button onclick="this.parentElement.remove();calcul()" class="col-span-2 bg-red-500/20 text-red-400 rounded-xl font-bold">X</button></div>`;
+}
+function zidLigne(){document.getElementById('lignes').insertAdjacentHTML('beforeend',ligneHTML())}
+zidLigne(); zidLigne();
+function calcul(){let t=0;document.querySelectorAll('.ligne').forEach(l=>{let q=+l.querySelector('.qte').value||0,p=+l.querySelector('.prix').value||0;t+=q*p});document.getElementById('totalTxt').innerText='Total: '+t+' DH';return t}
+function sayeb(){
+  let total=calcul(); if(!document.getElementById('client').value){alert('Kteb smiya dyal client!');return}
+  let num='FP-'+Date.now().toString().slice(-5);
+  document.getElementById('facture').classList.remove('hidden');
+  document.getElementById('fNum').innerText=num;
+  document.getElementById('fDate').innerText=new Date().toLocaleDateString('fr-FR');
+  document.getElementById('fVendeur').innerText=document.getElementById('vendeurNom').value||'Facture Power';
+  document.getElementById('fVendeurInfo').innerText=(document.getElementById('vendeurTel').value||'')+' • '+(document.getElementById('vendeurMail').value||'');
+  document.getElementById('fClient').innerText=document.getElementById('client').value;
+  document.getElementById('fClientTel').innerText=document.getElementById('clientTel').value;
+  document.getElementById('fTotal').innerText=total+' DH';
+  document.getElementById('fFooter').innerText=(document.getElementById('vendeurNom').value||'')+' • '+(document.getElementById('vendeurMail').value||'');
+  let html='';document.querySelectorAll('.ligne').forEach(l=>{let s=l.querySelector('.serv').value,q=+l.querySelector('.qte').value||0,p=+l.querySelector('.prix').value||0; if(p>0) html+=`<tr class="border-b"><td class="py-4 font-bold">${s}</td><td class="text-center">${q}</td><td class="text-right">${p} DH</td><td class="text-right font-bold">${q*p} DH</td></tr>`});
+  document.getElementById('fLignes').innerHTML=html;
+  let h=JSON.parse(localStorage.getItem('factures')||'[]');h.unshift({num,client:document.getElementById('client').value,total,date:new Date().toLocaleDateString('fr-FR')});localStorage.setItem('factures',JSON.stringify(h.slice(0,20)));afficherHist();
+  document.getElementById('facture').scrollIntoView({behavior:'smooth'});
+}
+function afficherHist(){let h=JSON.parse(localStorage.getItem('factures')||'[]');document.getElementById('hist').innerHTML=h.length?h.map(f=>`<div class="bg-zinc-900 rounded-2xl p-4"><p class="font-bold text-sm">${f.client} - <span class="gold">${f.total} DH</span></p><p class="text-xs text-zinc-500">${f.num} • ${f.date}</p></div>`).join(''):'<p class="text-zinc-500 text-sm">Ba9i ma sayebti 7ta facture</p>'}
+afficherHist();
+</script></body></html>
