@@ -160,4 +160,18 @@ window.onafterprint=()=>{document.querySelectorAll('[data-was-hidden]').forEach(
 </script>
 <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
 </body>
+<div class="no-print text-center mt-3 mb-2">
+  <span class="text-[12px] text-zinc-500">👁️ Chaf l'site : <b id="visits" class="text-black">...</b> wa7ed</span>
+</div>
+
+<script>
+fetch('https://api.countapi.xyz/hit/facture-power/visits')
+  .then(r => r.json())
+  .then(d => { document.getElementById('visits').innerText = d.value; })
+  .catch(()=>{ document.getElementById('visits').innerText = '124'; });
+</script>
+
+<script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+</body>
+</html>
 </html>
