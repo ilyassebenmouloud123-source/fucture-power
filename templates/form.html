@@ -1,30 +1,29 @@
 <!DOCTYPE html>
 <html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FACTURE POWER - LUXURY</title>
+<title>FACTURE POWER - LUXURY | فاتورة باور</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
 <style>
 body{font-family:'Manrope',sans-serif;background:#f8f7f3}
 .serif{font-family:'Cormorant Garamond',serif}
 .gold{color:#B8860B}
+.lbl{font-size:11px;font-weight:800;letter-spacing:.15em;color:#8a7a3a;margin-bottom:4px;display:block}
 @media print{
   .no-print, button, input[type="file"]{display:none !important}
   body{background:white !important; padding:0 !important}
   .facture-box{box-shadow:none !important; border:none !important; margin:0 !important; max-width:100% !important; border-radius:0 !important}
   input, textarea, select{border:none !important; border-bottom:1px solid #eee !important; background:transparent !important; box-shadow:none !important; padding:4px 0 !important; -webkit-appearance:none; appearance:none}
   input::placeholder, textarea::placeholder{color:transparent !important}
+  .lbl{margin-bottom:0}
 }
 @page{size:A4; margin:12mm}
 </style>
 </head>
-<body class="min-h-screen p-3 md:p-6">
-
-<div class="no-print text-center mb-4">
-  <button onclick="window.print()" style="background:black;color:white;padding:14px 30px;border-radius:30px;border:none;font-weight:bold;cursor:pointer">🖨️ IMPRIMER / PDF</button>
-</div>
+<body class="min-h-screen p-3 md:p-6" dir="ltr">
 
 <div class="facture-box max-w-3xl mx-auto bg-white rounded-[32px] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.15)] border border-[#efe9d7] overflow-hidden">
 
+<!-- HEADER -->
 <div class="p-8 border-b border-[#efe9d7] flex justify-between items-center">
   <div class="flex items-center gap-4">
     <label class="no-print w-16 h-16 bg-black rounded-2xl flex items-center justify-center overflow-hidden cursor-pointer relative">
@@ -32,67 +31,131 @@ body{font-family:'Manrope',sans-serif;background:#f8f7f3}
       <span id="logoText" class="text-[#D4AF37] font-black text-xl">FP</span>
       <input type="file" id="logoInput" class="hidden" accept="image/*">
     </label>
-    <div><p class="font-black tracking-[0.2em] text-[14px]">FACTURE POWER</p><p class="text-[10px] tracking-[0.3em] gold">LUXURY EDITION</p></div>
+    <div><p class="font-black tracking-[0.2em] text-[14px]">FACTURE POWER</p><p class="text-[10px] tracking-[0.3em] gold">LUXURY EDITION • النسخة الفاخرة</p></div>
   </div>
+  <div class="text-right"><p class="text-[11px] text-zinc-400">Date / التاريخ</p><p id="dateNow" class="font-bold text-sm"></p></div>
 </div>
 
 <div class="p-8">
   <div class="text-center mb-8">
-    <h1 class="serif text-[42px] font-bold tracking-[0.2em]">FACTURE</h1>
-    <p class="text-[10px] tracking-[0.3em] gold mt-1">ELEGANCE • QUALITÉ • CONFIANCE</p>
+    <h1 class="serif text-[42px] font-bold tracking-[0.2em]">FACTURE | فاتورة</h1>
+    <p class="text-[10px] tracking-[0.3em] gold mt-1">ELEGANCE • QUALITÉ • CONFIANCE • الأناقة • الجودة • الثقة</p>
   </div>
 
-  <h2 class="font-bold text-[11px] tracking-[0.3em] mb-4">1. Émetteur | المرسل</h2>
-  <input id="company" placeholder="Nom du magasin" class="w-full border border-[#efe9d7] rounded-2xl p-4 mb-3 bg-[#fcfbf7] text-sm">
+  <!-- HISTORIQUE - MAKAYBANCH F L'IMPRESSION -->
+  <div class="no-print bg-[#fcf9ef] border border-[#efe9d7] rounded-2xl p-4 mb-6">
+    <p class="font-bold text-[11px] tracking-[0.2em] mb-2">📋 HISTORIQUE / السجل - المحلات</p>
+    <div id="historic" class="flex gap-2 flex-wrap mb-3"></div>
+    <p class="font-bold text-[11px] tracking-[0.2em] mb-2">🧾 FACTURES SAUVEGARDÉES / الفواتير المحفوظة</p>
+    <div id="factureHistory" class="flex flex-col gap-2"></div>
+    <button type="button" onclick="clearAll()" class="text-[11px] text-red-400 mt-3">↺ Nouveau - Effacer tout / جديد - مسح الكل</button>
+  </div>
+
+  <!-- 1. EMETTEUR -->
+  <h2 class="font-bold text-[11px] tracking-[0.3em] mb-4">1. Émetteur | المرسل - صاحب المحل</h2>
+  <label class="lbl">Nom du magasin / اسم المحل *</label>
+  <input id="company" placeholder="Ex: Ahmed Plombier / أحمد السباك" class="w-full border border-[#efe9d7] rounded-2xl p-4 mb-3 bg-[#fcfbf7] text-sm">
   <div class="grid grid-cols-2 gap-3 mb-3">
-    <input id="ice" placeholder="ICE" class="border border-[#efe9d7] rounded-2xl p-4 bg-[#fcfbf7] text-sm">
-    <input id="rc" placeholder="RC / IF" class="border border-[#efe9d7] rounded-2xl p-4 bg-[#fcfbf7] text-sm">
+    <div><label class="lbl">ICE / المعرف المشترك</label><input id="ice" placeholder="ICE" class="w-full border border-[#efe9d7] rounded-2xl p-4 bg-[#fcfbf7] text-sm"></div>
+    <div><label class="lbl">RC / IF / السجل التجاري</label><input id="rc" placeholder="RC / IF" class="w-full border border-[#efe9d7] rounded-2xl p-4 bg-[#fcfbf7] text-sm"></div>
   </div>
-  <input id="adresse" placeholder="Adresse" class="w-full border border-[#efe9d7] rounded-2xl p-4 mb-3 bg-[#fcfbf7] text-sm">
+  <label class="lbl">Adresse / العنوان</label>
+  <input id="adresse" placeholder="Adresse / العنوان - Ex: Tanger, Maroc" class="w-full border border-[#efe9d7] rounded-2xl p-4 mb-3 bg-[#fcfbf7] text-sm">
   <div class="grid grid-cols-2 gap-3 mb-8">
-    <input id="tel" placeholder="Téléphone" class="border border-[#efe9d7] rounded-2xl p-4 bg-[#fcfbf7] text-sm">
-    <input id="email" placeholder="Email" class="border border-[#efe9d7] rounded-2xl p-4 bg-[#fcfbf7] text-sm">
+    <div><label class="lbl">Téléphone / الهاتف</label><input id="tel" placeholder="06 XX XX XX XX" class="w-full border border-[#efe9d7] rounded-2xl p-4 bg-[#fcfbf7] text-sm"></div>
+    <div><label class="lbl">Email / البريد الإلكتروني</label><input id="email" placeholder="exemple@gmail.com" class="w-full border border-[#efe9d7] rounded-2xl p-4 bg-[#fcfbf7] text-sm"></div>
   </div>
 
+  <!-- 2. CLIENT -->
   <h2 class="font-bold text-[11px] tracking-[0.3em] mb-4">2. Client | الزبون</h2>
-  <input id="client" placeholder="Nom et prénom du client" class="w-full border rounded-2xl p-4 mb-3 text-sm">
+  <label class="lbl">Nom du client / اسم الزبون</label>
+  <input id="client" placeholder="Nom et prénom du client / اسم الزبون" class="w-full border rounded-2xl p-4 mb-3 text-sm">
   <div class="grid grid-cols-2 gap-3 mb-8">
-    <input id="clientTel" placeholder="Téléphone du client" class="border rounded-2xl p-4 text-sm">
-    <input id="clientIce" placeholder="ICE Client" class="border rounded-2xl p-4 text-sm">
+    <div><label class="lbl">Téléphone Client / هاتف الزبون</label><input id="clientTel" placeholder="Téléphone / الهاتف" class="w-full border rounded-2xl p-4 text-sm"></div>
+    <div><label class="lbl">ICE Client / معرف الزبون</label><input id="clientIce" placeholder="ICE Client (optionnel / اختياري)" class="w-full border rounded-2xl p-4 text-sm"></div>
   </div>
 
-  <h2 class="font-bold text-[11px] tracking-[0.3em] mb-4">3. Services / Produits | الخدمات</h2>
+  <!-- 3. SERVICES -->
+  <h2 class="font-bold text-[11px] tracking-[0.3em] mb-4">3. Services / Produits | الخدمات / المنتجات</h2>
+  <div class="flex gap-2 text-[10px] text-zinc-400 mb-1"><span class="flex-1">Service / الخدمة</span><span class="w-20 text-center">Qté / العدد</span><span class="w-28 text-center">Prix / الثمن</span></div>
   <div id="items">
-    <div class="flex gap-2 mb-2"><input placeholder="Service 1" class="flex-1 border rounded-2xl p-4 text-sm nom"><input type="number" value="1" class="w-20 border rounded-2xl p-4 text-sm qte"><input type="number" placeholder="Prix" class="w-28 border rounded-2xl p-4 text-sm prix"></div>
+    <div class="flex gap-2 mb-2"><input placeholder="Service 1 / الخدمة 1" class="flex-1 border rounded-2xl p-4 text-sm nom"><input type="number" value="1" class="w-20 border rounded-2xl p-4 text-sm qte"><input type="number" placeholder="Prix / الثمن" class="w-28 border rounded-2xl p-4 text-sm prix"></div>
   </div>
-  <button type="button" onclick="addItem()" class="no-print text-xs gold font-bold mt-2">+ Ajouter une ligne</button>
+  <button type="button" onclick="addItem()" class="no-print text-xs gold font-bold mt-2">+ Ajouter une ligne / إضافة سطر</button>
 
   <div class="grid grid-cols-3 gap-3 mt-8">
-    <div><label class="text-[10px] text-zinc-400">Remise %</label><input id="remise" type="number" value="0" class="w-full border rounded-xl p-3 text-sm"></div>
-    <div><label class="text-[10px] text-zinc-400">TVA %</label><select id="tva" class="w-full border rounded-xl p-3 text-sm"><option value="0">0%</option><option value="20" selected>20%</option><option value="10">10%</option></select></div>
-    <div><label class="text-[10px] text-zinc-400">Paiement</label><select id="paiement" class="w-full border rounded-xl p-3 text-sm"><option>Espèces</option><option>Virement</option><option>Chèque</option></select></div>
+    <div><label class="lbl">Remise % / التخفيض</label><input id="remise" type="number" value="0" class="w-full border rounded-xl p-3 text-sm"></div>
+    <div><label class="lbl">TVA % / الضريبة</label><select id="tva" class="w-full border rounded-xl p-3 text-sm"><option value="0">0%</option><option value="20" selected>20%</option><option value="10">10%</option></select></div>
+    <div><label class="lbl">Paiement / الدفع</label><select id="paiement" class="w-full border rounded-xl p-3 text-sm"><option>Espèces / نقدا</option><option>Virement / تحويل</option><option>Chèque / شيك</option></select></div>
   </div>
 
-  <textarea id="notes" placeholder="Notes / Conditions..." class="w-full border rounded-2xl p-4 mt-6 text-sm h-20"></textarea>
-  <div class="mt-6 text-right"><p id="totalDisplay" class="font-black text-[18px]">TOTAL: 0 DH</p></div>
+  <label class="lbl mt-6">Notes / ملاحظات</label>
+  <textarea id="notes" placeholder="Notes / Conditions... / ملاحظات..." class="w-full border rounded-2xl p-4 text-sm h-20"></textarea>
+  <div class="mt-6 text-right"><p id="totalDisplay" class="font-black text-[18px]">TOTAL / المجموع: 0 DH</p></div>
 </div>
+</div>
+
+<!-- BOUTONS L'TEHT - KAYBANO GHIR F L'ECRAN -->
+<div class="no-print max-w-3xl mx-auto mt-4 flex justify-center gap-3 pb-6">
+  <button onclick="saveFacture()" style="background:#B8860B;color:white;padding:16px 24px;border-radius:30px;border:none;font-weight:bold;cursor:pointer">💾 Sauvegarder / حفظ</button>
+  <button onclick="window.print()" style="background:black;color:white;padding:16px 34px;border-radius:30px;border:none;font-weight:bold;cursor:pointer">🖨️ IMPRIMER / طباعة - PDF</button>
 </div>
 
 <script>
-// KOLCHI KHAWI - WALO MAKAYT7FED
-localStorage.clear();
-document.querySelectorAll('input, textarea').forEach(el=>{ if(el.type!=='file') el.value = el.id==='remise' ? '0' : el.id==='qte' ? '1' : ''; });
+document.getElementById('dateNow').innerText = new Date().toLocaleDateString('fr-MA');
+const c=document.getElementById('company'),ic=document.getElementById('ice'),rcEl=document.getElementById('rc'),ad=document.getElementById('adresse'),tel=document.getElementById('tel'),em=document.getElementById('email');
+let hist=JSON.parse(localStorage.getItem('historic')||'[]');
+let factures=JSON.parse(localStorage.getItem('factures')||'[]');
 
-// LOGO - ghir f had l'merra, makayt7fedch
+function renderHistoric(){
+  const d=document.getElementById('historic'); d.innerHTML='';
+  if(hist.length===0) d.innerHTML='<span class="text-xs text-zinc-400">Aucun magasin / لا يوجد محل بعد</span>';
+  hist.slice(0,6).forEach((h,i)=>{
+    const w=document.createElement('div'); w.className='flex items-center bg-white border border-[#efe9d7] rounded-full overflow-hidden';
+    const b=document.createElement('button'); b.type='button'; b.innerText=h.company; b.className='text-[11px] px-3 py-1.5'; b.onclick=()=>{c.value=h.company;ic.value=h.ice;rcEl.value=h.rc;ad.value=h.adresse;tel.value=h.tel;em.value=h.email;};
+    const x=document.createElement('button'); x.type='button'; x.innerText='✕'; x.className='text-[10px] px-2 text-red-400'; x.onclick=()=>{hist.splice(i,1);localStorage.setItem('historic',JSON.stringify(hist));renderHistoric();};
+    w.appendChild(b); w.appendChild(x); d.appendChild(w);
+  });
+}
+function saveHistoric(){
+  if(!c.value.trim()) return;
+  if(!hist.find(x=>x.company==c.value)){hist.unshift({company:c.value,ice:ic.value,rc:rcEl.value,adresse:ad.value,tel:tel.value,email:em.value});localStorage.setItem('historic',JSON.stringify(hist.slice(0,10)));renderHistoric();}
+}
+[c,ic,rcEl,ad,tel,em].forEach(el=>el.addEventListener('change',saveHistoric));
+function clearAll(){[c,ic,rcEl,ad,tel,em].forEach(el=>el.value='');['client','clientTel','clientIce','notes'].forEach(id=>document.getElementById(id).value='');document.getElementById('items').innerHTML='<div class="flex gap-2 mb-2"><input placeholder="Service 1 / الخدمة 1" class="flex-1 border rounded-2xl p-4 text-sm nom"><input type="number" value="1" class="w-20 border rounded-2xl p-4 text-sm qte"><input type="number" placeholder="Prix / الثمن" class="w-28 border rounded-2xl p-4 text-sm prix"></div>';calc();}
+
 const logoInput=document.getElementById('logoInput'),logoPreview=document.getElementById('logoPreview'),logoText=document.getElementById('logoText');
-logoInput.addEventListener('change',e=>{const r=new FileReader();r.onload=()=>{logoPreview.src=r.result;logoPreview.classList.remove('hidden');logoText.classList.add('hidden')};r.readAsDataURL(e.target.files[0])});
+if(localStorage.getItem('logo')){logoPreview.src=localStorage.getItem('logo');logoPreview.classList.remove('hidden');logoText.classList.add('hidden');}
+logoInput.addEventListener('change',e=>{const r=new FileReader();r.onload=()=>{localStorage.setItem('logo',r.result);logoPreview.src=r.result;logoPreview.classList.remove('hidden');logoText.classList.add('hidden')};r.readAsDataURL(e.target.files[0])});
 
-function addItem(){const div=document.createElement('div');div.className='flex gap-2 mb-2';div.innerHTML='<input placeholder="Service" class="flex-1 border rounded-2xl p-4 text-sm nom"><input type="number" value="1" class="w-20 border rounded-2xl p-4 text-sm qte"><input type="number" placeholder="Prix" class="w-28 border rounded-2xl p-4 text-sm prix"><button type="button" onclick="this.parentElement.remove();calc()" class="no-print text-red-400 text-xs">✕</button>';document.getElementById('items').appendChild(div);calc()}
-function calc(){let t=0;document.querySelectorAll('#items > div').forEach(r=>{let q=parseFloat(r.querySelector('.qte').value||1);let p=parseFloat(r.querySelector('.prix').value||0);t+=q*p});let rem=parseFloat(document.getElementById('remise').value||0);let tva=parseFloat(document.getElementById('tva').value||0);let apres=t-(t*rem/100);let total=apres+(apres*tva/100);document.getElementById('totalDisplay').innerText='TOTAL: '+total.toFixed(2)+' DH'}
+function addItem(){const div=document.createElement('div');div.className='flex gap-2 mb-2';div.innerHTML='<input placeholder="Service / الخدمة" class="flex-1 border rounded-2xl p-4 text-sm nom"><input type="number" value="1" class="w-20 border rounded-2xl p-4 text-sm qte"><input type="number" placeholder="Prix / الثمن" class="w-28 border rounded-2xl p-4 text-sm prix"><button type="button" onclick="this.parentElement.remove();calc()" class="no-print text-red-400 text-xs">✕</button>';document.getElementById('items').appendChild(div);calc()}
+function calc(){let t=0;document.querySelectorAll('#items > div').forEach(r=>{let q=parseFloat(r.querySelector('.qte').value||1);let p=parseFloat(r.querySelector('.prix').value||0);t+=q*p});let rem=parseFloat(document.getElementById('remise').value||0);let tva=parseFloat(document.getElementById('tva').value||0);let apres=t-(t*rem/100);let total=apres+(apres*tva/100);document.getElementById('totalDisplay').innerText='TOTAL / المجموع: '+total.toFixed(2)+' DH';}
 document.addEventListener('input',calc);calc();
 
-// 9bel l'impression: khbi ay champ khawi (ICE, IF, Email...)
-window.onbeforeprint=()=>{document.querySelectorAll('input, textarea, select').forEach(el=>{if(!el.value||el.value.trim()===''||el.value==='0'&&el.id==='remise'){el.dataset.wasHidden='1';el.style.display='none'}});document.querySelectorAll('#items > div').forEach(r=>{let nom=r.querySelector('.nom').value.trim();let prix=r.querySelector('.prix').value.trim();if(!nom&&!prix){r.dataset.hide='1';r.style.display='none'}})};
-window.onafterprint=()=>{document.querySelectorAll('input, textarea, select').forEach(el=>{if(el.dataset.wasHidden){el.style.display='';delete el.dataset.wasHidden}});document.querySelectorAll('#items > div').forEach(r=>{if(r.dataset.hide){r.style.display='';delete r.dataset.hide}})};
+function saveFacture(){
+  let items=[];document.querySelectorAll('#items > div').forEach(r=>{let nom=r.querySelector('.nom').value.trim();let qte=r.querySelector('.qte').value;let prix=r.querySelector('.prix').value;if(nom)items.push({nom,qte,prix});});
+  if(!c.value.trim()&&items.length===0){alert('3mer smiya o khdma 3ad Sauvegarder / املأ الاسم والخدمة ثم احفظ');return;}
+  let f={company:c.value,ice:ic.value,rc:rcEl.value,adresse:ad.value,tel:tel.value,email:em.value,client:document.getElementById('client').value,clientTel:document.getElementById('clientTel').value,items:items,total:document.getElementById('totalDisplay').innerText,date:new Date().toLocaleDateString('fr-MA')};
+  factures.unshift(f);localStorage.setItem('factures',JSON.stringify(factures.slice(0,20)));renderFactures();saveHistoric();alert('T7fdat ✅ / تم الحفظ');
+}
+function renderFactures(){
+  const d=document.getElementById('factureHistory');d.innerHTML='';
+  if(factures.length===0){d.innerHTML='<p class="text-xs text-zinc-400">Mazal makayn walo / لا توجد فواتير بعد - khdem facture o brek Sauvegarder / حفظ</p>';return;}
+  factures.forEach((f,i)=>{
+    let div=document.createElement('div');div.className='flex justify-between items-center bg-white border border-[#efe9d7] rounded-xl p-3';
+    let services=f.items.map(it=>it.nom+' ('+it.prix+' DH)').join(' + ');
+    div.innerHTML=`<div class="flex-1 cursor-pointer" onclick="loadFacture(${i})"><b class="text-sm">${f.company||'Sans nom'} - ${f.client||''}</b><p class="text-[11px] text-zinc-500">${services} | ${f.total} | ${f.date}</p></div><button onclick="deleteFacture(${i})" class="text-red-400 text-xs px-2">✕ Supprimer / حذف</button>`;
+    d.appendChild(div);
+  });
+}
+function loadFacture(i){
+  let f=factures[i];c.value=f.company;ic.value=f.ice;rcEl.value=f.rc;ad.value=f.adresse;tel.value=f.tel;em.value=f.email;document.getElementById('client').value=f.client||'';document.getElementById('clientTel').value=f.clientTel||'';
+  document.getElementById('items').innerHTML='';f.items.forEach(it=>{const div=document.createElement('div');div.className='flex gap-2 mb-2';div.innerHTML=`<input value="${it.nom}" class="flex-1 border rounded-2xl p-4 text-sm nom"><input type="number" value="${it.qte}" class="w-20 border rounded-2xl p-4 text-sm qte"><input type="number" value="${it.prix}" class="w-28 border rounded-2xl p-4 text-sm prix"><button type="button" onclick="this.parentElement.remove();calc()" class="no-print text-red-400 text-xs">✕</button>`;document.getElementById('items').appendChild(div);});calc();window.scrollTo({top:0,behavior:'smooth'});
+}
+function deleteFacture(i){if(confirm('Tmesa7 had l\'facture? / حذف هذه الفاتورة؟')){factures.splice(i,1);localStorage.setItem('factures',JSON.stringify(factures));renderFactures();}}
+renderHistoric();renderFactures();
+
+window.onbeforeprint=()=>{document.querySelectorAll('input, textarea, select').forEach(el=>{if(!el.value||el.value.trim()===''){el.dataset.wasHidden='1';el.style.display='none';let lbl=el.previousElementSibling;if(lbl&&lbl.classList.contains('lbl')){lbl.dataset.wasHidden='1';lbl.style.display='none';}}});document.querySelectorAll('#items > div').forEach(r=>{let nom=r.querySelector('.nom').value.trim();let prix=r.querySelector('.prix').value.trim();if(!nom&&!prix){r.dataset.hide='1';r.style.display='none'}})};
+window.onafterprint=()=>{document.querySelectorAll('[data-was-hidden]').forEach(el=>{el.style.display='';delete el.dataset.wasHidden});document.querySelectorAll('#items > div').forEach(r=>{if(r.dataset.hide){r.style.display='';delete r.dataset.hide}})};
 </script>
 </body></html>
