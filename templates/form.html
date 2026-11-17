@@ -158,4 +158,7 @@ renderHistoric();renderFactures();
 window.onbeforeprint=()=>{document.querySelectorAll('input, textarea, select').forEach(el=>{if(!el.value||el.value.trim()===''){el.dataset.wasHidden='1';el.style.display='none';let lbl=el.previousElementSibling;if(lbl&&lbl.classList.contains('lbl')){lbl.dataset.wasHidden='1';lbl.style.display='none';}}});document.querySelectorAll('#items > div').forEach(r=>{let nom=r.querySelector('.nom').value.trim();let prix=r.querySelector('.prix').value.trim();if(!nom&&!prix){r.dataset.hide='1';r.style.display='none'}})};
 window.onafterprint=()=>{document.querySelectorAll('[data-was-hidden]').forEach(el=>{el.style.display='';delete el.dataset.wasHidden});document.querySelectorAll('#items > div').forEach(r=>{if(r.dataset.hide){r.style.display='';delete r.dataset.hide}})};
 </script>
+<script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+</body>
+</html>
 </body></html>
